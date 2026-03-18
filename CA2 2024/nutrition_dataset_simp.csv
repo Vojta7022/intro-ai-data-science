@@ -1,0 +1,769 @@
+﻿name,iron,carbohydrate,fiber,fat,water,calories,category
+Tea,0.08,0.2,0,0,99.7,1,vegetarian
+Tea,0,1.13,0,0,98.87,0,vegetarian
+Water,0,0,0,0,100,0,vegetarian
+Water,0.15,10.95,0.4,0.2,87.4,48,vegetarian
+Tea,0.07,15.72,0,0,84.2,61,vegetarian
+Water,0.13,14.55,0.1,0,85.3,57,vegetarian
+ Malted drink mix,0.7,71.21,0.1,9.52,2,428,vegetarian
+Water,0,0.03,0,0,99.97,0,vegetarian
+Water,0,0,0,0,99.98,0,vegetarian
+Tea,0,0,0,0,99.93,0,vegetarian
+black coffee,0.02,0.3,0,0,99.7,1,vegetarian
+Coffee,0.05,0,0,0,99.3,0,vegetarian
+Tea,0,8.75,0,0,91.22,38,vegetarian
+Cold brew,0.13,1.69,0,0.18,97.8,9,vegetarian
+ decaffeinated,0.21,94.45,0,0,5.09,378,vegetarian
+ chocolate almond milk,0.45,1.25,0.4,1.46,95.78,21,vegetarian
+chocolate drink,0,5,0,0,94.98,21,vegetarian
+ rape juice,0,11.25,0,0,88.45,44,vegetarian
+ NOS Zero,0,1.03,0,0,98.35,4,vegetarian
+Lemon tea,0.16,12.83,1.2,0.83,84.88,62,vegetarian
+Iced tea,1.14,8.81,0,0.97,85.95,57,vegetarian
+ chocolate drink,1.9,17.3,1.3,1.69,75.82,101,vegetarian
+Coca-cola,0,0,0,0,99.17,0,vegetarian
+Vanilla drink,3.94,40.2,0.2,0.1,57.4,162,vegetarian
+Pepsi,0.3,41.4,0.4,0,58.2,162,vegetarian
+Lemon Drink,0.8,43.1,0.2,0.7,55.5,175,vegetarian
+ Orange drink,0.26,39,0.1,0,59.2,153,vegetarian
+ Orange-flavor drink,0.26,42.9,0.2,0.5,55.2,172,vegetarian
+ Cocktail mix,0.04,71.6,0,0.01,28.24,287,vegetarian
+Bagels,3.8,55.2,2.3,1.7,32,274,vegetarian
+Bagels,3.98,53,2.3,2.1,32.7,278,vegetarian
+Bagels,2.23,47.47,6.2,1.24,39.4,241,vegetarian
+Bagels,3.08,53.3,3.6,1.2,32.9,255,vegetarian
+Barbecue loaf,1.16,6.4,0,8.9,64.82,173,vegetarian
+Barley flour or meal,2.68,74.52,10.1,1.6,12.11,345,vegetarian
+Barley malt flour,4.71,78.3,7.1,1.84,8.21,361,vegetarian
+Barley,1.33,28.22,3.8,0.44,68.8,123,vegetarian
+Barley,3.6,73.48,17.3,2.3,9.44,354,vegetarian
+Barley,2.5,77.72,15.6,1.16,10.09,352,vegetarian
+Bread crumbs,4.83,71.98,4.5,5.3,6.51,395,vegetarian
+Chapati,3.04,47.8,2.3,6,34.7,287,vegetarian
+Chapati,2.5,69.5,6.5,12.2,7.8,418,vegetarian
+Chapati,2.9,52.3,4.3,4.4,33.6,274,vegetarian
+Chapati,2.62,55.7,2.2,1.2,32.1,275,vegetarian
+Chapati,3.91,51.88,2.2,2.42,33,272,vegetarian
+Chapati,2.2,46.13,9.7,9.2,35.43,299,vegetarian
+Chapati,1.61,45.35,9.6,13.2,33.5,326,vegetarian
+Chapati,2.94,50.1,3.2,3.5,35.7,271,vegetarian
+Roti,3.12,39.8,4.5,4.4,44,236,vegetarian
+Roti,3.15,41.3,12,3.2,46,201,vegetarian
+Roti,2.7,48.5,4,4.4,36.7,269,vegetarian
+Roti,2.3,43.3,0,3.5,44,210,vegetarian
+Roti,2.2,51.29,1.7,17.45,22.38,390,vegetarian
+Roti,2.25,47.07,6.3,3.13,33.55,266,vegetarian
+Roti,2.69,56,2.6,5,30.1,290,vegetarian
+Roti,3.1,51.4,6,5.4,32.7,278,vegetarian
+Roti,4.15,43.8,3,2.2,40,245,vegetarian
+Naan,3.1,40.5,12,2.9,46,203,vegetarian
+Naan,0.98,47.84,0.7,17.12,25.48,374,vegetarian
+Naan,1.58,39.84,3.6,1.53,55.01,186,vegetarian
+Naan,1.89,33.88,5.3,0,50.88,188,vegetarian
+Naan,2.87,56.38,2.3,11.58,21.54,367,vegetarian
+Ciabatta,4.09,55.77,4.7,4.27,24.23,313,vegetarian
+Ciabatta,3.88,54.3,2.3,3.3,29.3,293,vegetarian
+Ciabatta,0.59,69.5,6.5,12.2,7.8,418,vegetarian
+Ciabatta,1.83,52.3,4.3,4.4,33.6,274,vegetarian
+Ciabatta,1.4,55.7,2.2,1.2,32.1,275,vegetarian
+Ciabatta,3.49,48.68,4,3.24,35.2,267,vegetarian
+Ciabatta,3.07,47.8,4,3.4,37.8,248,vegetarian
+Ciabatta,2.91,42.47,11.1,2.92,39.6,217,vegetarian
+Ciabatta,4.89,43.91,9.2,2.15,39.6,238,vegetarian
+Breadfruit,0.54,27.12,4.9,0.23,70.65,103,vegetarian
+Breakfast bar,4.86,72.9,2.1,7.5,14.5,377,vegetarian
+Breakfast bars,3.18,66.7,3.1,17.6,4.1,464,vegetarian
+Breakfast tart,3.42,76.8,1.5,5.99,12.04,372,vegetarian
+ARCHWAY Home Style Cookies,4.1,69.12,1,14.43,10.34,420,vegetarian
+ARCHWAY Home Style Cookies,2.19,66.76,2,16.53,9.99,435,vegetarian
+ARCHWAY Home Style Cookies,4.68,69.41,1.2,12.06,11.43,403,vegetarian
+Artificial Blueberry Muffin Mix,0,77.45,0,8.7,6.4,407,vegetarian
+Baking chocolate,4.15,36.2,18.1,47.7,0.9,472,vegetarian
+Baking chocolate,1.23,68.4,2.7,23.36,1.5,502,vegetarian
+Baking chocolate,2.91,65.96,6.7,26.15,1.27,517,vegetarian
+Butter,1.09,0,0,55.1,42.1,499,vegetarian
+Butter,0.05,2.87,0,78.3,16.72,718,vegetarian
+Butter,0.02,0.06,0,81.11,17.94,717,vegetarian
+Butter,1.09,0,0,55.1,43.2,499,vegetarian
+Butterbur,0.63,0.38,0,0.13,97.92,3,vegetarian
+Butterbur,0.1,3.61,0,0.04,94.5,14,vegetarian
+Butterbur,0.1,2.16,0,0.02,96.7,8,vegetarian
+Butterbur,0.1,2.16,0,0.02,96.7,8,vegetarian
+Cake,1.48,53.64,0.6,13.96,25.87,353,vegetarian
+Cake,1.1,38,0.5,12.5,46.1,264,vegetarian
+Cake,3.6,60.31,3.2,15.93,18.57,399,vegetarian
+Cake,0.52,57.8,1.5,0.8,33.2,258,vegetarian
+Cake,0.38,42.9,1.4,8.5,45.4,252,vegetarian
+Cake,2.07,61.6,3.7,9.1,25.3,324,vegetarian
+Cake,2.72,61,0.5,2.7,29.7,290,vegetarian
+Cake,0.27,86.13,0.5,0.27,3.73,366,vegetarian
+Cake,1.8,79.2,0,9.8,3.6,415,vegetarian
+Cake,2.92,80.16,2.3,8.14,3.9,391,vegetarian
+Cake,1.36,80.9,0.7,9.5,3.5,423,vegetarian
+English muffins,4.9,55.04,3,2.21,32.07,276,non-vegetarian
+English muffins,3.29,50.3,3,1.9,35,255,non-vegetarian
+English muffins,3.12,48.7,5,2.1,37.2,243,non-vegetarian
+English muffins,2.66,44.1,7.3,2.3,41,221,non-vegetarian
+English muffins,2.87,44.8,4.6,2,42.3,223,non-vegetarian
+English muffins,2.53,50.17,3.5,1.75,39.48,245,non-vegetarian
+English muffins,2.45,40.4,6.7,2.1,45.7,203,non-vegetarian
+English muffins,4,44.17,3.5,1.69,43.56,227,non-vegetarian
+English muffins,4.65,52.65,2.8,2.02,32.97,270,non-vegetarian
+Fried chicken,2.09,20.34,0.7,2.73,63.08,156,non-vegetarian
+Fried chicken,0.6,28.88,2.7,17.04,49.27,272,non-vegetarian
+Fried chicken,1.42,31.25,1,17.76,40.11,318,non-vegetarian
+Fried chicken,2.59,2.08,0,16.18,66.7,212,non-vegetarian
+Fried chicken,1.12,19.56,0.3,29.22,33.87,398,non-vegetarian
+Fried chicken,0.54,0,0,4.54,65.61,153,non-vegetarian
+Fried chicken,1.03,0,0,7.41,64.24,172,non-vegetarian
+Fried chicken,0.91,0.24,0,9.41,64.96,178,non-vegetarian
+Fried chicken,0.96,2.13,0,10.2,56.16,215,non-vegetarian
+Fried chicken,1.67,20.23,2.9,9.75,58.78,206,non-vegetarian
+Fried chicken,1.59,19.69,1.2,6.35,58.42,189,non-vegetarian
+Fried chicken,0.14,15.05,0.9,0.14,83.61,65,non-vegetarian
+Fried chicken,0.21,29.18,0,5.13,60.9,175,non-vegetarian
+Burrito,1.32,22.61,1.2,11.76,48.02,257,non-vegetarian
+Burrito,1.37,19.87,1.2,8.05,52.52,220,non-vegetarian
+Burrito,1.47,23.22,1.3,15.1,47.88,275,non-vegetarian
+Burrito,1.45,18.43,0.9,10.31,55.17,222,non-vegetarian
+Burrito,1.51,22.04,0.6,17.73,47.03,291,vegetarian
+Burrito,2.28,22.97,1.2,15.63,47.55,277,vegetarian
+Burrito,1.65,15.9,1.8,21.78,48.1,308,vegetarian
+Burrito,2.63,17.44,0.2,18.1,48.82,286,vegetarian
+Burrito,2.14,26.66,1.6,6.41,55.03,205,vegetarian
+Burrito,1.01,21.39,3.7,12.48,58.15,219,vegetarian
+Burrito,3.58,14.37,0,19.21,52.51,277,vegetarian
+Burrito,0.78,43.58,2.7,25.23,24.52,411,vegetarian
+Burrito,0.86,27.99,0.7,18.9,42.15,308,vegetarian
+Tuna,0.7,0,0,5.5,70.77,141,non-vegetarian
+Tuna,1.06,0,0,7.31,68.72,153,non-vegetarian
+Tuna,4.63,0,0,9.71,50.3,210,non-vegetarian
+Tuna,0.77,0,0,5.02,70.71,138,non-vegetarian
+Tuna,0.65,0,0,7.39,68.07,167,non-vegetarian
+Tuna,1.39,0,0,8.21,59.83,198,non-vegetarian
+Tuna,0.65,0,0,8.08,64.02,186,non-vegetarian
+Tuna,1.53,0,0,0.82,75.21,116,non-vegetarian
+Tuna,0.97,0,0,2.97,74.02,128,non-vegetarian
+Tuna,2.2,0,0,14.38,22.79,378,non-vegetarian
+Tuna,4.1,0,0,13.44,20.59,371,non-vegetarian
+Cod,0,2.8,0,6.6,27.3,312,non-vegetarian
+Cod,0.56,0,0,1.18,73.65,111,non-vegetarian
+Cod,0.2,0,0,0.5,80.31,85,non-vegetarian
+Cod,1.24,0,0,17.65,59.22,252,non-vegetarian
+Cod,0.2,0,0,1.61,76.12,111,non-vegetarian
+Cod,0.49,0,0,0.86,75.92,105,non-vegetarian
+Cod,1.41,0,0,11.59,64.16,203,non-vegetarian
+Cod,1.57,0,0,17.81,53.27,262,non-vegetarian
+Salmon,0.28,0,0,7.19,74.65,144,non-vegetarian
+Salmon,0.39,0,0,8.23,67,178,non-vegetarian
+Salmon,0.36,0,0,7.38,68.72,168,non-vegetarian
+Salmon,0.23,0,0,2.37,81.11,86,non-vegetarian
+Salmon,0.67,0,0,12.14,62.97,211,non-vegetarian
+Salmon,1.6,0,0,1.29,62.28,132,non-vegetarian
+Salmon,0.92,0,0,0.59,68.98,130,non-vegetarian
+Salmon,1.15,0,0,6.32,70.94,153,non-vegetarian
+Salmon,0.85,0,0,17.74,61.88,239,non-vegetarian
+Salmon,0.21,0,0,0.55,79.65,90,non-vegetarian
+Salmon,2.28,0,0,2.56,69.04,134,non-vegetarian
+Salmon,0.83,0,0,0.82,73.88,111,non-vegetarian
+Grouper,0.64,0,0,14.95,59.31,236,non-vegetarian
+Grouper,1.91,0,0,4.73,68.79,146,non-vegetarian
+Grouper,1.14,0,0,1.3,73.36,118,non-vegetarian
+Grouper,1.49,0,0,10.12,61.73,201,non-vegetarian
+Grouper,0.36,0,0,1.62,74.67,109,non-vegetarian
+Grouper,1.16,0,0,1.18,73.25,117,non-vegetarian
+Grouper,0.77,1.92,0,8.23,58.63,204,non-vegetarian
+Grouper,0.37,0,0,2.56,72.14,124,non-vegetarian
+Grouper,0.35,0,0,4.63,71.91,133,non-vegetarian
+Grouper,0.24,0,0,1.72,70.35,128,non-vegetarian
+Grouper,0.9,0,0,5.18,69.94,135,non-vegetarian
+Grouper,1.92,0,0,8.47,63.36,190,non-vegetarian
+Bass,0.41,0,0,6.28,69.17,158,non-vegetarian
+Bass,1.08,0,0,2.99,73.36,124,non-vegetarian
+Bass,1.41,0,0,4.86,70.52,150,non-vegetarian
+Bass,0.45,0,0,7.93,68.26,172,non-vegetarian
+Bass,0.69,0,0,2.65,71.59,128,non-vegetarian
+Bass,0.31,0,0,4.69,70.24,147,non-vegetarian
+Bass,1.67,0,0,1.56,73.47,119,non-vegetarian
+Bass,1.67,0,0,2.97,73.99,119,non-vegetarian
+Bass,1.03,0,0,8.13,59.62,182,non-vegetarian
+Bass,0.35,0,0,2.85,77.67,105,non-vegetarian
+Bass,0.61,0,0,4.3,71.5,139,non-vegetarian
+Bass,0.38,0,0,5.82,70.5,150,non-vegetarian
+Trout,0.56,0,0,3.67,72.34,116,non-vegetarian
+Trout,0.55,0,0,5.57,69.38,140,non-vegetarian
+Trout,0,0,0,0.2,81.86,72,non-vegetarian
+Trout,0.97,0,0,13.77,68.19,197,non-vegetarian
+Trout,0.16,0,0,1.33,80.34,91,non-vegetarian
+Trout,0.38,0,0,0.67,81.22,82,non-vegetarian
+Trout,0.37,0,0,3.17,78.03,104,non-vegetarian
+Trout,1.1,0,0,9.04,72.05,158,non-vegetarian
+Catfish,0.83,0,0,0.69,76.35,87,non-vegetarian
+Catfish,3.25,0,0,4.84,73.37,131,non-vegetarian
+Catfish,0.36,0,0,2.95,76.95,95,non-vegetarian
+Catfish,0.34,0,0,13.42,64.89,208,non-vegetarian
+Catfish,1.13,0,0,0.7,77.55,85,non-vegetarian
+Catfish,0.32,0,0,6.73,70.85,148,non-vegetarian
+Catfish,0.5,0,0,11.66,68.26,184,non-vegetarian
+Catfish,1.49,0,0,3.69,75.66,114,non-vegetarian
+Catfish,0.89,0,0,1.02,79.22,92,non-vegetarian
+Catfish,1.16,0,0,7.89,70.15,158,non-vegetarian
+Catfish,0.3,0,0,1.34,79.08,90,non-vegetarian
+Apples,0.24,16.84,2,0.43,82.28,67,vegetarian
+Apples,0.17,14.41,2.8,0.42,84.63,56,vegetarian
+Apricots,0.3,21.31,2.7,0.11,77.56,83,vegetarian
+Apricots,0.39,11.12,2,0.39,86.35,48,vegetarian
+Apricots,0.3,12.5,1.6,0.1,86.3,49,vegetarian
+Apricots,0.3,21.47,1.6,0.08,77.56,83,vegetarian
+Bananas,1.15,88.28,9.9,1.81,3,346,vegetarian
+Bananas,0.26,22.84,2.6,0.33,74.91,89,vegetarian
+Blackberries,0.62,9.61,5.3,0.49,88.15,43,vegetarian
+Blackberries,0.21,9.84,3.2,1.07,88.05,52,vegetarian
+Blackberries,0.65,23.1,3.4,0.14,75.06,92,vegetarian
+Blackberries,0.8,15.67,5,0.43,82.21,64,vegetarian
+Candied fruit,0.17,82.74,1.6,0.07,16.7,322,vegetarian
+Cherries,0.36,16.01,2.1,0.2,82.25,63,vegetarian
+Cherries,1.37,8.94,1.1,0.1,89.93,36,vegetarian
+Cherries,1.26,29.23,0.8,0.09,69.73,114,vegetarian
+Cherries,0.35,26.23,1.5,0.15,72.66,102,vegetarian
+Cherries,1.3,23.27,1.1,0.1,75.66,91,vegetarian
+Cherries,0.35,21.27,1.4,0.15,77.61,83,vegetarian
+Cherries,0.58,13.81,1.5,0.02,84.95,54,vegetarian
+Cherries,1.32,19.3,0.8,0.1,79.62,75,vegetarian
+Cherries,0.35,22.36,2.1,0.13,75.53,89,vegetarian
+Clementines,0.14,12.02,1.7,0.15,86.58,47,vegetarian
+Dates,1.02,75.03,8,0.39,20.53,282,vegetarian
+Dates,0.9,74.97,6.7,0.15,21.32,277,vegetarian
+Durian,0.43,27.09,3.8,5.33,64.99,147,vegetarian
+Figs,0.37,19.18,2.9,0.3,79.11,74,vegetarian
+Figs,0.28,27.86,0,0.1,71.39,107,vegetarian
+Figs,0.28,22.9,2.2,0.1,76.33,88,vegetarian
+Figs,0.29,17.95,1.8,0.1,81.26,69,vegetarian
+Figs,0.29,13.99,2.2,0.1,85.21,53,vegetarian
+Figs,0.88,27.57,4.2,0.4,69.8,107,vegetarian
+Figs,2.03,63.87,9.8,0.93,30.05,249,vegetarian
+Tomatoes,0.68,4.01,0.7,0.11,94.34,18,vegetarian
+Tomatoes,2.68,23.33,5.8,14.08,53.83,213,vegetarian
+Tomatoes,0.57,3.47,1.9,0.25,94.75,16,vegetarian
+Tomatoes,0.57,3.47,1.9,0.25,94.75,16,vegetarian
+Tomatoes,0.51,5.1,1.1,0.2,93,23,vegetarian
+Tomatoes,0.47,3.18,0.9,0.19,94.78,16,vegetarian
+Tomatoes,0.49,2.98,0.7,0.26,95.28,15,vegetarian
+Tomatoes,1.33,6.19,1,0.19,91.54,26,vegetarian
+Tomatoes,1.06,13.05,1.7,2.68,80.63,79,vegetarian
+Tomatoes,9.09,55.76,12.3,2.97,14.56,258,vegetarian
+Tomatoes,0.26,3.62,0,0.08,94.23,15,vegetarian
+Tomatoes,0.68,4.01,0.7,0.11,94.34,18,vegetarian
+Pears,0.15,16.1,3.1,0.09,83.18,67,vegetarian
+Pears,0.22,19.08,2.7,0.18,80.35,74,vegetarian
+Pears,0.24,15.79,3.1,0.1,83.31,66,vegetarian
+Pears,0.18,15.23,3.1,0.14,83.96,57,vegetarian
+Pears,0,10.65,3.6,0.23,88.25,42,vegetarian
+Pears,0.19,14.94,3,0.14,84.24,62,vegetarian
+Pears,0.22,25.25,1.6,0.13,74.28,97,vegetarian
+Pears,0.2,12.2,1.6,0.1,87.3,47,vegetarian
+Pears,0.22,19.17,1.6,0.13,80.35,74,vegetarian
+Pears,0.29,12.94,1.6,0.07,86.47,50,vegetarian
+Pears,0.28,15.17,1.6,0.03,84.46,57,vegetarian
+Pears,0.21,7.81,1.6,0.03,91.81,29,vegetarian
+Pears,2.1,69.7,7.5,0.63,26.69,262,vegetarian
+Apple juice,0.26,11.54,0.1,0.1,87.9,47,vegetarian
+Apple juice,0.26,11.54,0.1,0.1,87.9,47,vegetarian
+Apple juice,0.91,41,0,0.37,57,166,vegetarian
+Apricot nectar,0.38,14.39,0.6,0.09,84.87,56,vegetarian
+Apricot nectar,0.38,14.39,0.6,0.09,84.87,56,vegetarian
+Blackberry juice,0.48,7.8,0.1,0.6,90.9,38,vegetarian
+Carrot juice,0.46,9.28,0.8,0.15,88.87,40,vegetarian
+Camembert,0.11,5.52,0,34.44,52.62,350,vegetarian
+Camembert,0.44,1.43,0,27.8,41.56,357,vegetarian
+Camembert,0.19,7.66,0,1,71.87,105,vegetarian
+Camembert,0.28,13.4,0,0.8,56.9,148,vegetarian
+Camembert,0.65,4.09,0,21.28,55.22,264,vegetarian
+Camembert,0.23,1.55,0,31.14,37.92,389,vegetarian
+Camembert,0.63,4.78,0,30.71,39.61,366,vegetarian
+Camembert,0.52,42.65,0,29.51,13.44,466,vegetarian
+Camembert,0.24,2.22,0,27.44,41.46,356,vegetarian
+Camembert,0.49,13.91,0,27.84,22.65,420,vegetarian
+Manchego,0.33,11.6,0,14,53.1,239,vegetarian
+Manchego,0.14,3.2,0.6,1,82.5,74,vegetarian
+Manchego,0.07,3.38,0,4.3,79.79,98,vegetarian
+Manchego,0.15,6.66,0,0.29,81.01,72,vegetarian
+Manchego,0.13,0.49,0,27.25,48.42,327,vegetarian
+Manchego,0.43,3.5,0,7,58.9,180,vegetarian
+Manchego,0.17,8.13,0,15.28,66.72,201,vegetarian
+Manchego,0.72,0.7,0,21.6,46,313,vegetarian
+Manchego,0.41,3.5,0,17.6,50.5,271,vegetarian
+Manchego,0.17,3.4,0,27.4,37.8,374,vegetarian
+Manchego,0.59,1.75,0,28.51,42.48,358,vegetarian
+Manchego,0.72,0.68,0,30.28,41.01,373,vegetarian
+Manchego,0.41,1.12,0,30.04,41.77,368,vegetarian
+Manchego,0.13,3.59,0,22.78,63.11,253,vegetarian
+Mozzarella,0,3.97,0,30,38,366,vegetarian
+Mozzarella,0.2,2.98,0,23.82,51.42,299,vegetarian
+Mozzarella,0.18,2.04,0,24.35,42.17,325,vegetarian
+Mozzarella,0.13,3.41,0,19.4,48.2,282,vegetarian
+Mozzarella,0.12,4.06,0,20.41,44.29,309,vegetarian
+Mozzarella,0.9,1.37,0,20,50.6,265,vegetarian
+Mozzarella,0.52,3.5,0,17.6,50.6,274,vegetarian
+Mozzarella,0.77,3.63,0,26.94,30.91,387,vegetarian
+Mozzarella,0.56,2,0,30.64,39.38,369,vegetarian
+Mozzarella,1.62,0.12,0,29.84,45.52,364,vegetarian
+Mozzarella,0.87,3.41,0,27.34,25,415,vegetarian
+Mozzarella,0.23,8.06,0,19.72,44.81,304,vegetarian
+Cream,0.07,4.63,0,19.35,73.07,198,vegetarian
+Cream,0,9,0,1.4,86,59,vegetarian
+Cream,0.05,4.73,0,10.39,81.24,123,vegetarian
+Cream,0.1,2.74,0,36.08,57.81,340,vegetarian
+Cream,0.05,2.82,0,19.1,74.51,191,vegetarian
+Cream,0.03,2.96,0,30.91,63.5,292,vegetarian
+Cream,0,3.33,0,5,87.83,72,vegetarian
+Cream,0.05,12.49,0,22.22,61.33,257,vegetarian
+Creamy dressing,0.26,16,0,8,73,140,vegetarian
+Creamy dressing,0.25,20,0,2.7,74.7,107,vegetarian
+Creamy dressing,0.13,7,0,14,74,160,vegetarian
+Greek yogurt,0.09,7.68,0,0.18,85.23,56,vegetarian
+Greek yogurt,0.05,4.66,0,3.25,87.9,61,vegetarian
+Greek yogurt,0.06,18.64,0,1.15,75.3,99,vegetarian
+Greek yogurt,0.42,23.53,1.2,0,71.57,112,vegetarian
+Greek yogurt,0.07,19,0,0.2,75.4,95,vegetarian
+Greek yogurt,0.07,3.6,0,0.39,85.1,59,vegetarian
+Greek yogurt,0.09,12.07,0.6,0.15,79.13,82,vegetarian
+Greek yogurt,0,17.04,0,0,79,78,vegetarian
+Greek yogurt,0.04,10.37,0.5,0.18,80.26,78,vegetarian
+Greek yogurt,0.07,13.8,0,1.25,79,86,vegetarian
+Bison,3.19,0,0,8.62,65.09,179,non-vegetarian
+Bison,2.78,0.05,0,7.21,71.59,146,non-vegetarian
+Canada oose,5.91,0,0,4.02,70.78,133,non-vegetarian
+Canadian bacon,0.56,1.8,0,2.78,62.5,146,non-vegetarian
+Canadian bacon,0.44,1.34,0,2.62,72.34,110,non-vegetarian
+Duck,2.33,0,0,5.96,64.6,178,non-vegetarian
+Duck,4.49,0,0,2.5,68.25,140,non-vegetarian
+Duck,0,0,0,0.4,79,84,non-vegetarian
+Duck,30.53,3.53,0,4.64,71.78,136,non-vegetarian
+Duck,2.4,0,0,39.34,48.5,404,non-vegetarian
+Duck,4.16,0,0,15.2,66.52,211,non-vegetarian
+Duck,4.51,0,0,4.25,75.51,123,non-vegetarian
+Duck,2.4,0.94,0,5.95,73.77,135,non-vegetarian
+Duck,2.08,0,0,11.4,60.9,217,non-vegetarian
+Duck,3.26,0,0,10.85,63.25,202,non-vegetarian
+Duck,2.7,0,0,28.35,51.84,337,non-vegetarian
+Duck,2.7,0,0,11.2,64.22,201,non-vegetarian
+Dumpling,1.26,29.64,0.9,6.14,57.25,195,non-vegetarian
+Spaghetti,1.25,15.24,1.8,1.01,77.82,90,vegetarian
+Spaghetti,1.03,11.45,2.7,4.11,78.8,100,vegetarian
+Spaghetti,1.04,26.15,0,0.63,68.14,130,vegetarian
+Spaghetti,2.13,74.81,10.6,1.57,8.34,372,vegetarian
+Spaghetti,0.72,30.88,2,0.21,59.73,164,vegetarian
+Spaghetti,4.15,65.65,2.4,2.23,9.23,374,vegetarian
+Spaghetti,0.85,14.55,1.4,0.47,81.4,70,vegetarian
+Spaghetti,0.69,16.6,1.9,1.74,75.6,99,vegetarian
+Spaghetti,0.29,15.87,1.2,0.6,79.7,80,vegetarian
+Spaghetti,0.71,13.89,1.2,0.4,81.4,67,vegetarian
+Spaghetti,1.75,11.65,1.5,2.43,78.1,87,vegetarian
+Spaghetti,0.43,12.7,1.6,2.78,78.1,95,vegetarian
+Spaghetti,1.43,12.3,1.2,0.79,82.4,69,vegetarian
+Spaghetti,0.71,13.89,1.2,0.4,81.4,67,vegetarian
+Ravioli,1.65,31.51,4.6,1.5,60.72,159,vegetarian
+Ravioli,1.11,25.04,0,0.94,68.58,130,vegetarian
+Ravioli,1.72,30.07,3.9,1.71,61.8,149,vegetarian
+Ravioli,0.62,40.75,1.9,1.7,52.8,200,vegetarian
+Ravioli,0.93,79.26,11,2.08,10,357,vegetarian
+Ravioli,3.41,73.3,11.3,2.55,9.23,361,non-vegetarian
+Ravioli,3.33,73.1,10.1,2.68,8.85,362,non-vegetarian
+Ravioli,3.62,73.37,9.2,2.93,8.21,352,non-vegetarian
+Ravioli,3.3,74.67,3.2,1.51,9.9,371,non-vegetarian
+Ravioli,0.53,32.2,1.7,1.67,62.3,138,non-vegetarian
+Ravioli,1.3,74.67,3.2,1.51,9.9,371,non-vegetarian
+Ravioli,1.28,30.59,1.8,0.93,62.13,157,vegetarian
+Ravioli,0.5,30.59,1.8,0.93,62.13,157,vegetarian
+Ravioli,1.28,30.86,1.8,0.93,62.13,158,vegetarian
+Ravioli,0.5,30.86,1.8,0.93,62.13,158,vegetarian
+Animal fat,0,0,0,99.5,0,897,non-vegetarian
+Babyfood,0.35,11.2,0.3,0.1,88.2,47,non-vegetarian
+Babyfood,0.66,9.9,0.1,0.2,89.5,41,non-vegetarian
+Babyfood,0.39,11.34,0.1,0.2,88.1,46,non-vegetarian
+Bacon and beef sticks,1.86,0.8,0,44.2,21.6,517,non-vegetarian
+Bacon bits,0.72,28.6,10.2,25.9,8,476,non-vegetarian
+Bacon,0.72,4.8,0,20,58.93,253,non-vegetarian
+Bacon,2.41,5.31,2.6,29.52,48.98,309,non-vegetarian
+Bacon,0.42,0.83,0,39.27,45.01,407,non-vegetarian
+Beef sausage,1.57,0.35,0,27.98,51.12,332,non-vegetarian
+Beef sausage,1.53,0.03,0,37.57,43.75,405,non-vegetarian
+Beef stew,2.48,7.85,0.9,5.53,80.78,99,non-vegetarian
+Beef,2.27,0,0,15.37,58.37,241,non-vegetarian
+Beef,2.43,0,0,16.5,57.5,254,non-vegetarian
+Beef,2.58,0,0,16.17,57.7,254,non-vegetarian
+Beef,2.74,0,0,14.36,58.98,240,non-vegetarian
+Beef,2.89,0,0,11.1,61.33,214,non-vegetarian
+Beef,2.99,0,0,8.43,63.26,192,non-vegetarian
+Beef,3.05,0,0,6.37,64.76,174,non-vegetarian
+Beef,3.11,0,0,4.06,66.43,154,non-vegetarian
+Beef,6.81,0,0,6,62.27,179,non-vegetarian
+Blood sausage,6.4,1.29,0,34.5,47.3,379,non-vegetarian
+Bologna,1.21,5.49,0,24.59,51.87,308,non-vegetarian
+Bologna,1.25,5.61,0,22.73,56.42,272,non-vegetarian
+Bologna,1.15,3.45,0,16.06,64.87,211,non-vegetarian
+Bologna,1,5.2,0,14.8,65,204,non-vegetarian
+Bratwurst,0.87,0,0,10.35,70.28,176,non-vegetarian
+Bratwurst,0.53,2.85,0,29.18,51.45,333,non-vegetarian
+Bratwurst,0.74,0,0,31.7,53.51,341,non-vegetarian
+Bratwurst,1,2,0,26.34,56.65,297,non-vegetarian
+Chicken breast tenders,1,17.56,0,12.89,51.34,252,non-vegetarian
+Chicken breast tenders,1.11,15.01,1.1,15.75,52.74,263,non-vegetarian
+Chicken breast,0.39,2.92,0,1.86,74.47,98,non-vegetarian
+Chicken breast,0.32,2.17,0,0.39,76.71,79,non-vegetarian
+Chicken breast,0.3,2.25,0,0.39,76.73,80,non-vegetarian
+Chicken patty,0.95,12.84,0.3,19.58,50.82,287,non-vegetarian
+Chicken patty,0.93,13.61,1.2,20.04,50.04,292,non-vegetarian
+Chicken pot pie,0.76,19.21,1.1,11.85,62.58,204,non-vegetarian
+Chicken spread,0.87,4.05,0.3,17.56,57.41,158,non-vegetarian
+Chicken tenders,0.84,14.86,1.7,13.58,54.83,240,non-vegetarian
+Chicken breast,0.83,0.4,0,18.86,59.41,251,non-vegetarian
+Chicken breast,0.82,0.31,0,13.87,62.96,212,non-vegetarian
+Chicken breast,2.41,3.34,0.6,12.67,61.79,211,non-vegetarian
+Chicken breast,1.79,9.03,0,17.53,49.29,291,non-vegetarian
+Chicken wings,1.27,0,0,8.63,66.87,176,non-vegetarian
+Chicken wings,1,0,0,42.76,42.09,443,non-vegetarian
+Chicken wings,0.76,0.13,0,10.71,67.06,183,non-vegetarian
+Chicken wings,0.98,0.21,0,14.62,63.97,215,non-vegetarian
+Chicken wings,0.43,0,0,3.61,68.05,145,non-vegetarian
+Chicken wings,0.78,0,0,6.33,70.18,149,non-vegetarian
+Chicken drumstick,2.3,0,0,18.1,61.73,247,non-vegetarian
+Chicken drumstick,1.02,0.12,0,11.46,61.42,206,non-vegetarian
+Chicken drumstick,1.99,3.27,0,15.27,51.88,272,non-vegetarian
+Chicken drumstick,1.62,6.5,0,20.74,43.96,331,non-vegetarian
+Chicken drumstick,1.19,1.64,0.1,8.87,56.59,222,non-vegetarian
+Chicken drumstick,10.32,4.35,0,13.46,47.89,277,non-vegetarian
+Chicken drumstick,1.65,5.68,0,15.32,47.87,288,non-vegetarian
+Chicken drumstick,1.14,0.51,0,4.71,60.21,187,non-vegetarian
+Chicken drumstick,1.35,1.69,0.1,9.12,57.53,219,non-vegetarian
+Chicken drumstick,1.49,2.59,0,11.62,55.7,239,non-vegetarian
+Chicken drumstick,1.32,0,0,8.08,62.24,195,non-vegetarian
+Chicken drumstick,1.4,0.65,0,9.32,60.61,208,non-vegetarian
+Chicken feet,0.89,0,0,3.08,75.46,119,non-vegetarian
+Chicken feet,0.74,0,0,3.33,75.84,116,non-vegetarian
+Chicken feet,1.03,0,0,4.31,75.99,125,non-vegetarian
+Chicken feet,1.15,0,0,3.61,75.48,113,non-vegetarian
+Chicken feet,1.22,0,0,8.12,71.94,157,non-vegetarian
+Chicken feet,0.76,0,0,3.71,76.78,116,non-vegetarian
+Chicken feet,0.78,0,0,4.22,76.41,120,non-vegetarian
+Chicken feet,0.81,0,0,4.12,76.22,121,non-vegetarian
+Chicken feet,0.88,0,0,3.54,74.95,126,non-vegetarian
+Chicken feet,0.7,0,0,67.95,28.91,629,non-vegetarian
+Chicken feet,0.37,0.79,0,44.23,44.91,440,non-vegetarian
+Egg,0.08,0.73,0,0.17,87.57,52,non-vegetarian
+Egg,1.75,0.72,0,9.51,76.15,143,non-vegetarian
+Egg,2.73,3.59,0,26.54,52.31,322,non-vegetarian
+Egg,1.89,0.83,0,14.84,69.47,196,non-vegetarian
+Egg,0.18,4.51,0,0.32,5.48,357,non-vegetarian
+Egg,8.28,2.38,0,43.95,1.87,615,non-vegetarian
+Egg,0.23,4.17,0,0.04,14.62,351,non-vegetarian
+Egg,0.24,4.47,0,0.04,8.54,376,non-vegetarian
+Egg,1.19,1.12,0,10.61,74.62,155,non-vegetarian
+Egg,3.7,10.95,0,22.82,51.23,307,non-vegetarian
+Egg,1.75,0.71,0,9.47,75.85,143,non-vegetarian
+Egg,3.85,1.45,0,13.77,70.83,185,non-vegetarian
+Egg,3.64,1.35,0,13.27,70.43,185,non-vegetarian
+Egg,3.65,0.41,0,11.09,74.35,158,non-vegetarian
+Egg,4.1,1.15,0,11.88,72.5,171,non-vegetarian
+Egg,1.31,1.61,0,10.98,76.4,149,non-vegetarian
+Elk,2.68,0,0,2.85,64.58,148,non-vegetarian
+Elk,9.06,0,0,2.8,67.78,143,non-vegetarian
+Elk,2.27,0,0,2.1,76.54,98,non-vegetarian
+Elk,7.17,0,0,1.8,75.68,97,non-vegetarian
+Emu,4.56,0,0,2.3,66.43,154,non-vegetarian
+Emu,6.89,0,0,2.68,61.97,168,non-vegetarian
+Emu,7.27,0,0,2.01,64.31,156,non-vegetarian
+Emu,5.07,0,0,3.13,67.37,152,non-vegetarian
+Emu,5.01,0,0,4.65,65.83,163,non-vegetarian
+Emu,4.5,0,0,0.8,74.62,103,non-vegetarian
+Emu,5,0,0,0.74,75.4,102,non-vegetarian
+Emu,4.96,0,0,1.64,73.79,112,non-vegetarian
+Emu,4.02,0,0,4.03,72.87,134,non-vegetarian
+Emu,5.23,0,0,1.49,74.73,108,non-vegetarian
+Emu,4.5,0,0,0.48,74.87,103,non-vegetarian
+Emu,5.5,0,0,4.86,72.57,141,non-vegetarian
+Frankfurter,1.17,2.74,0,16.19,62.5,223,non-vegetarian
+Frankfurter,1.78,11.21,0,1.59,71.5,109,non-vegetarian
+Frankfurter,1.15,5.24,0,26.43,53.9,302,non-vegetarian
+Frankfurter,1.22,2.66,0,29.36,53.5,322,non-vegetarian
+Frankfurter,1.22,4.9,0,24.31,57.82,278,non-vegetarian
+Frankfurter,1.15,1.6,0,9.5,63.8,233,non-vegetarian
+Frankfurter,0.91,8.4,0.1,2.8,69.9,121,non-vegetarian
+Frankfurter,1.43,1.8,0,28.51,56.7,312,non-vegetarian
+Frankfurter,1.09,4.17,0,25.76,56.31,290,non-vegetarian
+Veal,0.76,0,0,2.83,77.45,108,non-vegetarian
+Veal,0.8,0,0,2.59,75.94,110,non-vegetarian
+Veal,0.9,0,0,3,76.58,112,non-vegetarian
+Veal,9.32,0,0,2.2,78.15,98,non-vegetarian
+Veal,1.05,0,0,3.07,79.16,101,non-vegetarian
+Veal,2.72,1.91,0,5.48,74.53,131,non-vegetarian
+Veal,1.15,0,0,8.25,64.68,183,non-vegetarian
+Veal,1,0,0,8.67,65.54,186,non-vegetarian
+Veal,0.91,0,0,4.65,66.1,160,non-vegetarian
+Veal,0.87,0,0,12.32,60.73,217,non-vegetarian
+Veal,0.97,0,0,13.96,59.91,228,non-vegetarian
+Veal,0.92,0,0,10.45,62.66,202,non-vegetarian
+Veal,1.03,0,0,8.42,65.31,184,non-vegetarian
+Turkey,1.03,0,0,3.84,66.7,159,non-vegetarian
+Turkey,0.82,0,0,5.51,64.04,170,non-vegetarian
+Turkey,0.55,0,0,2.08,70.18,127,non-vegetarian
+Turkey,0.55,0,0,2.08,70.18,127,non-vegetarian
+Turkey,1.07,0,0,6,66.85,158,non-vegetarian
+Turkey,1.07,0,0,6,66.85,158,non-vegetarian
+Turkey,0.55,0,0,2.08,70.18,127,non-vegetarian
+Turkey,0.77,0,0,3.7,68.81,140,non-vegetarian
+Turkey,1.8,1,0,6,71.7,138,non-vegetarian
+Turkey,3.68,0,0,4.64,69.22,155,non-vegetarian
+ Shrimp,1.26,11.47,0.4,12.28,52.86,242,non-vegetarian
+ Shrimp,0.5,0,0,0.74,79.69,83,non-vegetarian
+ Shrimp,2.13,0,0,1.36,75.85,100,non-vegetarian
+ Shrimp,0,0.2,0,0.28,74.33,99,non-vegetarian
+ Shrimp,1.08,0.48,0,7.52,71,155,non-vegetarian
+ Shrimp,0.39,15,0.5,0.46,74.66,95,non-vegetarian
+ Shrimp,0.6,9.13,0,1.47,74.91,101,non-vegetarian
+ Shrimp,0.32,1.52,0,1.7,71.56,119,non-vegetarian
+ Shrimp,0.76,0,0,1.54,77.55,97,non-vegetarian
+ Shrimp,0.5,0,0,0.74,79.69,83,non-vegetarian
+ Shrimp,0.43,0.95,0,1.24,73.31,110,non-vegetarian
+ Shrimp,1.11,0,0,1.3,80.8,87,non-vegetarian
+ Shrimp,1.41,3.12,0,1.94,66.76,143,non-vegetarian
+ Shrimp,0.29,0,0,0.86,78.11,89,non-vegetarian
+ Shrimp,2.88,0,0,1.51,75.1,115,non-vegetarian
+ Shrimp,0.83,0,0,1.2,79.37,82,non-vegetarian
+ Shrimp,0.21,0.91,0,1.01,83.01,71,non-vegetarian
+Crab,0,0,0,0.51,78.45,85,non-vegetarian
+Crab,0.59,0,0,0.6,79.57,84,non-vegetarian
+Crab,0.74,0.04,0,1.08,79.02,87,non-vegetarian
+Crab,0.37,0.74,0,0.97,79.18,86,non-vegetarian
+Crab,0.55,0,0,0.97,84.05,72,non-vegetarian
+Crab,1.22,2.43,0,1.51,74.07,112,non-vegetarian
+Crab,0.26,0,0,0.75,80.95,77,non-vegetarian
+Crab,2.5,0,0,1.18,80.58,90,non-vegetarian
+Crab,0.84,0,0,0.95,82.24,77,non-vegetarian
+Chilli flakes,36.96,50.02,14.6,15.9,9.54,337,vegetarian
+Chilli flakes,43,74.97,26.3,8.36,5.44,313,vegetarian
+Chilli flakes,9.71,63.95,25.3,3.26,12.46,251,vegetarian
+Chilli flakes,16.23,49.9,38,14.59,9.87,333,vegetarian
+Chilli flakes,13.97,68.47,28,6.7,8.28,311,vegetarian
+Chilli flakes,44.9,41.35,11.8,25.27,6.04,392,vegetarian
+Chilli flakes,17.3,49.7,34.8,14.28,10.75,282,vegetarian
+Chilli flakes,16.32,54.99,41.9,17.77,8.86,298,vegetarian
+Chilli flakes,66.36,44.24,10.5,22.27,8.06,375,vegetarian
+Chilli flakes,19.1,55.83,53.2,14.01,8.8,325,vegetarian
+Paprika,29.25,64.06,42.6,15.22,9.31,331,vegetarian
+Paprika,32.3,50.22,7.4,7.24,7.74,295,vegetarian
+Paprika,123.6,63.94,37,7.43,7.79,276,vegetarian
+Paprika,18.54,52.29,39.8,14.87,8.81,345,vegetarian
+Paprika,33.53,58.35,24.6,6.41,8.84,323,vegetarian
+Paprika,5.65,72.73,9,0.73,6.45,331,vegetarian
+Coriander,21.14,53.99,34.9,12.89,11.24,282,vegetarian
+Coriander,9.76,28.13,19.5,41.56,5.95,525,vegetarian
+Coriander,35.3,65.59,11.3,7.53,9.31,307,vegetarian
+Coriander,19.71,69.28,14.8,12.6,8.46,342,vegetarian
+Candies,0.34,70.97,1,19.33,6.1,468,vegetarian
+Candies,0.67,77.77,1.5,12.75,5.8,436,vegetarian
+Candies,1.2,62.68,3.1,23.98,2.3,482,vegetarian
+Candies,0.57,79.53,2.4,11.9,6.3,432,vegetarian
+Candies,1.33,57.54,4.3,34.5,1.26,563,vegetarian
+Candies,0.08,67.1,0,29.05,0.75,539,vegetarian
+Candies,0.64,63.9,3.6,23.21,1.66,495,vegetarian
+Candies,1.7,60.67,4.3,21,6.1,470,vegetarian
+Cereals ready-to-eat,12.89,78.19,11.2,9.89,2.5,386,vegetarian
+Cereals ready-to-eat,29,82.8,2,6.45,2.2,408,vegetarian
+Cereals ready-to-eat,27.27,87.3,2.3,2.71,2.5,390,vegetarian
+Cereals ready-to-eat,3.33,81.01,11.8,2.01,4.2,348,vegetarian
+Cereals ready-to-eat,16.1,84.69,6.1,4,2.2,375,vegetarian
+Cereals ready-to-eat,8.19,79.09,9.1,4,6.25,358,vegetarian
+Cereals ready-to-eat,23.7,83.9,5.8,4.19,2.09,376,vegetarian
+Oatmeal,40.93,77.2,2.9,0.49,9.69,365,vegetarian
+Oatmeal,11.3,75.42,6,6.37,6.56,379,vegetarian
+Oatmeal,1.79,73.59,12.7,5.09,8.6,356,vegetarian
+Oatmeal,38.2,71.08,4.2,4.68,6.82,355,vegetarian
+Oatmeal,3.7,68,12,5.3,5.9,367,vegetarian
+Oatmeal,30.38,74.18,4.3,4.67,6.8,360,vegetarian
+Cocoa,36,60,20,10,3,410,vegetarian
+Cocoa,14.5,51.39,29.8,23.71,3,486,vegetarian
+Cocoa,14.5,49.71,33.9,23.71,3,479,vegetarian
+Cocoa,15.52,58.3,29.8,13.1,2.7,220,vegetarian
+Cocoa,13.86,57.9,37,13.7,3,228,vegetarian
+Coffeecake,0.64,44.3,1,15.2,32.2,339,vegetarian
+Coffeecake,0.51,53.8,2,10.8,29.1,331,vegetarian
+Coffeecake,1.9,77.7,1.8,12,3.3,436,vegetarian
+Coffeecake,1.91,46.7,2,23.3,21.9,418,vegetarian
+Coffeecake,2.43,51.5,2.5,10.2,31.7,311,vegetarian
+Coffeecake,1.43,52.8,1.2,9.6,30.5,318,vegetarian
+Coffeecake,0.78,46.7,2,23.3,21.9,418,vegetarian
+Croissants,1.1,37.1,2.5,8.7,45.6,254,vegetarian
+Croissants,2.03,45.8,2.6,21,23.2,406,vegetarian
+Croissants,2.15,47,2.6,20.9,21,414,vegetarian
+Danish pastry,1.8,37.2,1,21.9,31.4,374,vegetarian
+Danish pastry,1.77,47.8,1.9,18.5,27.1,371,vegetarian
+Danish pastry,1.96,44.6,1.3,22.4,24.3,403,vegetarian
+Danish pastry,1.8,45.7,2,25.2,20.4,430,vegetarian
+Danish pastry,0.75,47.8,1.9,18.5,27.1,371,vegetarian
+Danish pastry,0.78,44.6,1.2,22.4,24.3,403,vegetarian
+Danish pastry,0.75,47.8,1.9,18.5,27.1,371,vegetarian
+Danish pastry,0.75,47.8,1.9,18.5,27.1,371,vegetarian
+Doughnuts,4,51.33,1.9,25.25,16.76,452,vegetarian
+Doughnuts,2.38,47.93,2.1,22.7,22,421,vegetarian
+Doughnuts,2.42,59.5,1.2,18.3,17.9,412,vegetarian
+Doughnuts,2.53,47.06,1.7,24.93,20.82,434,vegetarian
+Doughnuts,2.27,57.4,2.2,19.9,16.3,417,vegetarian
+Doughnuts,1.06,50.8,1.5,22.9,19.6,426,vegetarian
+Doughnuts,0.6,44.3,1.2,22.8,25.4,403,vegetarian
+Doughnuts,1.83,30,0.8,24.5,38.2,361,vegetarian
+Doughnuts,1.76,39,0.9,18.7,35.6,340,vegetarian
+Artichokes,0.56,9.18,4.6,0.5,86.5,45,vegetarian
+Artichokes,0.61,11.95,5.7,0.34,84.08,53,vegetarian
+Artichokes,0.56,9.18,4.6,0.5,86.5,45,vegetarian
+Ascidians (tunughnak) (Alaska Native),3.3,0,0,0.5,90.4,20,vegetarian
+Asparagus,1.83,2.46,1.6,0.65,93.98,19,vegetarian
+Asparagus,0.91,4.11,2,0.22,92.63,22,vegetarian
+Avocados,0.55,8.53,6.7,14.66,73.23,160,vegetarian
+Avocados,0.61,8.64,6.8,15.41,72.33,167,vegetarian
+Avocados,0.17,7.82,5.6,10.06,78.81,120,vegetarian
+Babyfood,0.56,10.5,0.1,0.1,89,43,vegetarian
+Beans,2.77,21.85,9.3,0.17,66.99,123,vegetarian
+Beans,1.17,14.5,4.3,0.6,78.04,84,vegetarian
+Beans,1.9,16.55,6.9,0.29,75.64,91,vegetarian
+Broadbeans (fava beans),1,12.41,3.7,0.22,80.32,71,vegetarian
+Broadbeans (fava beans),6.7,58.29,25,1.53,10.98,341,vegetarian
+Broadbeans (fava beans),1.5,19.65,5.4,0.4,71.54,110,vegetarian
+Broadbeans (fava beans),1.5,19.65,5.4,0.4,71.54,110,vegetarian
+Broadbeans,1.9,11.7,4.2,0.6,81,72,vegetarian
+Broadbeans,1.5,10.1,0,0.5,83.7,62,vegetarian
+Broadbeans,1.5,10.1,3.6,0.5,83.7,62,vegetarian
+Broccoli raab,1.27,3.12,2.8,0.52,91.41,33,vegetarian
+Broccoli raab,2.14,2.85,2.7,0.49,92.55,22,vegetarian
+Broccoli,0.56,3.81,2.5,0.72,93.54,22,vegetarian
+Broccoli,0.73,6.64,2.6,0.37,89.3,34,vegetarian
+Broccoli,0.59,4.67,2.6,0.76,92.55,30,vegetarian
+Broccoli,0.88,5.06,2.3,0.35,90.69,28,vegetarian
+Broccoli,0.88,5.06,2.3,0.35,90.69,28,vegetarian
+Broccoli,0.88,5.24,0,0.35,90.69,28,vegetarian
+Broccoli,0.81,4.78,3,0.29,91.46,26,vegetarian
+Broccoli,0.72,5.35,3,0.34,90.55,29,vegetarian
+Broccoli,0.67,7.18,3.3,0.41,89.25,35,vegetarian
+Brussels sprouts,1.2,7.1,2.6,0.5,88.9,36,vegetarian
+Brussels sprouts,0.48,8.32,4.1,0.39,86.74,42,vegetarian
+Brussels sprouts,1.2,7.1,2.6,0.5,88.9,36,vegetarian
+Brussels sprouts,0.48,8.32,4.1,0.39,86.74,42,vegetarian
+Cabbage,0.74,2.23,0,0.17,96.33,12,vegetarian
+Cabbage,2.5,2.4,1.6,0.5,94.3,15,vegetarian
+Cabbage,0.3,2.41,1.7,0.17,95.24,14,vegetarian
+Cabbage,0.17,5.51,1.9,0.06,92.57,23,vegetarian
+Cabbage,0.66,6.94,2.6,0.09,90.84,29,vegetarian
+Cabbage,0.38,5.41,2.8,0.09,92,24,vegetarian
+Cabbage,0.17,5.51,1.9,0.06,92.57,23,vegetarian
+Cabbage,1.04,1.78,1,0.16,95.55,12,vegetarian
+Cabbage,0.3,2.41,1.7,0.17,95.24,14,vegetarian
+Cabbage,0.66,6.94,2.6,0.09,90.84,29,vegetarian
+Cabbage,0.38,5.41,2.8,0.09,92,24,vegetarian
+Carrot,3.93,79.57,23.6,1.49,4,341,vegetarian
+Carrots,0.64,5.54,1.5,0.19,92.95,25,vegetarian
+Carrots,0.34,8.22,3,0.18,90.17,35,vegetarian
+Carrots,0.53,7.73,3.3,0.68,90.32,37,vegetarian
+Carrots,0.34,8.22,3,0.18,90.17,35,vegetarian
+Carrots,0.53,7.73,3.3,0.68,90.32,37,vegetarian
+Cassava,0.27,38.06,1.8,0.28,59.68,160,vegetarian
+Catsup,0.35,27.4,0.3,0.1,68.51,101,vegetarian
+Catsup,0.35,27.4,0.3,0.1,68.51,101,vegetarian
+Cattail,0.91,5.14,4.5,0,92.65,25,vegetarian
+Cauliflower,0.72,6.28,3.3,0.31,89.47,32,vegetarian
+Cauliflower,0.42,4.97,2,0.28,92.07,25,vegetarian
+Cauliflower,0.73,6.09,3.2,0.3,89.79,31,vegetarian
+Cauliflower,0.54,4.68,2.3,0.27,92.51,24,vegetarian
+Cauliflower,0.72,6.28,3.3,0.31,89.47,32,vegetarian
+Cauliflower,0.32,4.11,2.3,0.45,93,23,vegetarian
+Cauliflower,0.41,3.16,2.7,0.22,94,17,vegetarian
+Cauliflower,0.32,4.11,2.3,0.45,93,23,vegetarian
+Cauliflower,0.41,3.75,2.7,0.22,94,19,vegetarian
+Celery,0.2,2.97,1.6,0.17,95.43,16,vegetarian
+Celery,0.42,4,1.6,0.16,94.11,18,vegetarian
+Celery,0.42,4,1.6,0.16,94.11,18,vegetarian
+Chickpea flour (besan),4.86,57.82,10.8,6.69,10.28,387,vegetarian
+Chickpeas (garbanzo beans,1.07,22.53,6.4,2.77,66.72,139,vegetarian
+Chickpeas (garbanzo beans,1.23,13.49,4.4,1.95,78.55,88,vegetarian
+Chickpeas (garbanzo beans,4.31,62.95,12.2,6.04,7.68,378,vegetarian
+Chickpeas (garbanzo beans,0.98,22.87,6.3,2.47,66.87,138,vegetarian
+Chickpeas (garbanzo beans,1.23,13.49,4.4,1.95,78.55,88,vegetarian
+Chickpeas (garbanzo beans,2.89,27.42,7.6,2.59,60.21,164,vegetarian
+Chickpeas (garbanzo beans,2.89,27.42,7.6,2.59,60.21,164,vegetarian
+Edamame,2.27,8.91,5.2,5.2,72.77,121,vegetarian
+Edamame,2.11,7.61,4.8,4.73,75.17,109,vegetarian
+Eggplant,0.77,9.77,2.5,0.7,86.9,49,vegetarian
+Eggplant,0.23,5.88,3,0.18,92.3,25,vegetarian
+Eggplant,0.25,8.14,2.5,0.23,89.67,33,vegetarian
+Eggplant,0.25,8.73,2.5,0.23,89.67,35,vegetarian
+Endive,0.83,3.35,3.1,0.2,93.79,17,vegetarian
+Winged bean,1.09,3.21,0,0.66,90.11,37,vegetarian
+Winged beans,1.5,4.31,0,0.87,87.04,49,vegetarian
+Winged beans,13.44,41.71,25.9,16.32,8.34,409,vegetarian
+Winged beans,4.33,14.94,0,5.84,67.19,147,vegetarian
+Winged beans,4.33,14.94,0,5.84,67.19,147,vegetarian
+Winged beans,1.09,3.21,0,0.66,90.11,38,vegetarian
+Tofu,9.73,10.03,7.2,30.34,5.78,477,vegetarian
+Tofu,4.87,8.86,3.9,20.18,50.52,270,vegetarian
+Tofu,1.61,2.85,0.9,4.17,82.93,78,vegetarian
+Tofu,1.11,1.18,0.2,3.69,87.26,61,vegetarian
+Tofu,9.73,8.3,1.2,30.34,5.78,470,vegetarian
+Tofu,2.66,2.78,2.3,8.72,69.83,144,vegetarian
+Tofu,4.87,8.86,3.9,20.18,50.52,270,vegetarian
+Tofu,5.36,1.87,0.3,4.78,84.55,76,vegetarian
+Tofu,1.98,5.15,0,8,70.01,116,vegetarian
+Tofu,2.04,1.18,1,5.26,82.31,83,vegetarian
+Tofu,2.75,4.39,0.6,9.99,71.12,145,vegetarian
+Tofu,1.98,4.38,0,8,70.01,116,vegetarian
+Sweet Potato puffs,0.4,30.72,1.9,3.58,63.02,161,vegetarian
+Sweet potato,0.95,25.36,3,0.32,72.47,108,vegetarian
+Sweet potato,0.79,32.12,2.1,3.54,62.75,164,vegetarian
+Sweet potato,1.33,23.19,1.7,0.2,73.88,101,vegetarian
+Sweet potato,0.8,20.93,2.5,0.2,77.39,89,vegetarian
+Sweet potato,0.53,22.22,1.7,0.18,74.89,96,vegetarian
+Sweet potato,0.61,20.12,3,0.05,77.28,86,vegetarian
+Sweet potato,0.89,21.12,1.8,0.2,76.03,91,vegetarian
+Sweet potato,0.54,23.4,1.8,0.12,73.7,100,vegetarian
+Sweet potato,0.69,20.71,3.3,0.15,75.78,92,vegetarian
+Sweet potato,0.72,17.72,2.5,0.14,80.13,76,vegetarian
+Sweet potato,0.54,23.4,1.8,0.12,73.7,100,vegetarian
+Squash,0.48,2.97,1.3,0.13,94.74,14,vegetarian
+Squash,0.37,2.69,1,0.36,95.22,15,vegetarian
+Squash,0.33,3.3,1.9,0.17,95,16,vegetarian
+Squash,0.56,8.79,2.6,0.08,89.7,34,vegetarian
+Squash,0.28,6.46,2.9,0.37,91.1,30,vegetarian
+Squash,0.34,6.46,1.4,0.26,92.3,27,vegetarian
+Squash,0.93,14.58,4.4,0.14,82.9,56,vegetarian
+Squash,0.44,8.85,2.8,0.35,89.21,37,vegetarian
+Squash,0.6,10.49,3.2,0.09,87.8,40,vegetarian
+Spinach,1.89,4.21,2.9,0.57,90.17,29,vegetarian
+Spinach,3.57,3.75,2.4,0.26,91.21,23,vegetarian
+Spinach,1.96,4.8,3.7,0.87,88.94,34,vegetarian
+Spinach,3.57,3.75,2.4,0.26,91.21,23,vegetarian
+Spinach,1.96,4.8,3.7,0.87,88.94,34,vegetarian
+Seaweed,21.4,80.88,7.7,0.3,8.68,306,vegetarian
+Seaweed,28.5,23.9,3.6,7.72,4.68,290,vegetarian
+Seaweed,66.38,46.24,36.7,1.39,14,259,vegetarian
+Seaweed,1.86,6.75,0.5,0.03,91.32,26,vegetarian
+Seaweed,8.9,12.29,1.3,0.16,81.34,49,vegetarian
+Seaweed,2.85,9.57,1.3,0.56,81.58,43,vegetarian
+Seaweed,1.8,5.11,0.3,0.28,85.03,35,vegetarian
+Onions,0.13,4.02,1.2,0.09,94.1,19,vegetarian
+Onions,0.51,5.74,1.8,0.47,92.32,27,vegetarian
+Onions,0.33,6.82,1.8,0.1,91.99,29,vegetarian
+Onions,0.46,8.45,1.7,0.06,90.22,35,vegetarian
+Onions,0.24,9.56,1.4,0.19,87.86,42,vegetarian
+Onions,0.3,6,1.7,0.1,92.24,26,vegetarian
+Onions,0.34,6.11,1.4,0.05,92.24,26,vegetarian
+Onions,0.24,10.15,1.4,0.19,87.86,44,vegetarian
+Mushrooms,1.43,4.64,2.5,0.68,89.88,32,vegetarian
+Mushrooms,1.72,75.37,11.5,0.99,9.5,296,vegetarian
+Mushrooms,0.4,4.44,2.2,0.58,90.66,29,vegetarian
+Mushrooms,0.4,4.44,2.2,0.58,90.66,29,vegetarian
+Mushrooms,0.33,6.04,2.5,0.46,88.52,35,vegetarian
+Mushrooms,3.47,6.86,3.8,0.53,89.85,38,vegetarian
+Mushrooms,1.15,7.81,2.7,0.29,88.34,37,vegetarian
+Mushrooms,0.4,4.3,0.6,0.1,92.12,22,vegetarian
+Mushrooms,0.53,7.68,3.6,0.35,87.74,39,vegetarian
+Mushrooms,0.25,4.04,1.8,0.33,91.1,26,vegetarian
+Mushrooms,0.44,14.39,2.1,0.22,83.48,56,vegetarian

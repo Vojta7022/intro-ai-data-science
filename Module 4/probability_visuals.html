@@ -1,0 +1,2589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probability Visualizations - MS0003</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        #root {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Color scheme
+        const colors = {
+            primary: '#6366f1',
+            secondary: '#ec4899',
+            accent: '#10b981',
+            warning: '#f59e0b',
+            background: '#1e1e2e',
+            card: '#2a2a3e',
+            text: '#e2e8f0',
+            muted: '#94a3b8'
+        };
+
+        // Visual 1: Sample Space Grid
+        function SampleSpaceGrid() {
+            const [highlighted, setHighlighted] = useState(null);
+            
+            const outcomes = [
+                { id: 'HH', label: 'HH', row: 0, col: 0 },
+                { id: 'HT', label: 'HT', row: 0, col: 1 },
+                { id: 'TH', label: 'TH', row: 1, col: 0 },
+                { id: 'TT', label: 'TT', row: 1, col: 1 }
+            ];
+            
+            const events = {
+                'A': { outcomes: ['HH', 'HT'], color: colors.primary, desc: 'First coin is Heads' },
+                'B': { outcomes: ['HH', 'HT', 'TH'], color: colors.secondary, desc: 'At least one Head' },
+                'A∩B': { outcomes: ['HH'], color: colors.accent, desc: 'Both coins are Heads' }
+            };
+            
+            const isHighlighted = (id) => {
+                if (!highlighted) return false;
+                return events[highlighted]?.outcomes.includes(id);
+            };
+            
+            return (
+                <div style={{ padding: '20px' }}>
+                    <h3 style={{ marginBottom: '20px', color: colors.text }}>Sample Space: Two Coin Tosses</h3>
+                    
+                    <div style={{ display: 'flex', gap: '40px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                        <div style={{ 
+                            display: 'grid', 
+                            gridTemplateColumns: 'repeat(2, 100px)', 
+                            gap: '10px',
+                            padding: '20px',
+                            background: colors.card,
+                            borderRadius: '12px'
+                        }}>
+                            {outcomes.map(o => (
+                                <div key={o.id} style={{
+                                    width: '100px',
+                                    height: '100px',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    background: isHighlighted(o.id) ? events[highlighted].color : '#3a3a4e',
+                                    borderRadius: '8px',
+                                    transition: 'all 0.3s ease',
+                                    transform: isHighlighted(o.id) ? 'scale(1.05)' : 'scale(1)'
+                                }}>
+                                    <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{o.label}</span>
+                                    <span style={{ fontSize: '14px', color: colors.muted, marginTop: '5px' }}>P = ¼</span>
+                                </div>
+                            ))}
+                        </div>
+                        
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                            <p style={{ color: colors.muted, marginBottom: '10px' }}>Click an event to highlight:</p>
+                            {Object.entries(events).map(([name, event]) => (
+                                <button
+                                    key={name}
+                                    onClick={() => setHighlighted(highlighted === name ? null : name)}
+                                    style={{
+                                        padding: '12px 20px',
+                                        background: highlighted === name ? event.color : colors.card,
+                                        border: `2px solid ${event.color}`,
+                                        borderRadius: '8px',
+                                        color: '#fff',
+                                        cursor: 'pointer',
+                                        textAlign: 'left',
+                                        transition: 'all 0.2s ease'
+                                    }}
+                                >
+                                    <strong>Event {name}</strong>: {event.desc}
+                                    <br />
+                                    <span style={{ fontSize: '14px', opacity: 0.8 }}>
+                                        P({name}) = {event.outcomes.length}/4 = {event.outcomes.length === 1 ? '¼' : event.outcomes.length === 2 ? '½' : '¾'}
+                                    </span>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Visual: Multiple Experiments - AND vs OR
+        function MultipleExperiments() {
+            const [numExperiments, setNumExperiments] = useState(2);
+            const [targetOutcome, setTargetOutcome] = useState('HH');
+            
+            const outcomes = ['HH', 'HT', 'TH', 'TT'];
+            const probabilities = { 'HH': 0.25, 'HT': 0.25, 'TH': 0.25, 'TT': 0.25 };
+            
+            const targetProb = probabilities[targetOutcome];
+            
+            // P(A AND A AND ...) = P(A)^n
+            const probAnd = Math.pow(targetProb, numExperiments);
+            
+            // P(A OR A OR ...) = 1 - P(not A)^n
+            const probOr = 1 - Math.pow(1 - targetProb, numExperiments);
+            
+            return (
+                <div style={{ padding: '20px' }}>
+                    <h3 style={{ marginBottom: '20px', color: colors.text }}>Multiple Experiments: AND vs OR</h3>
+                    
+                    <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }}>
+                        <div style={{ flex: '1 1 350px' }}>
+                            <p style={{ color: colors.muted, marginBottom: '20px' }}>
+                                What happens when you repeat a coin toss experiment multiple times?
+                            </p>
+                            
+                            {/* Target outcome selector */}
+                            <div style={{ marginBottom: '20px' }}>
+                                <p style={{ marginBottom: '10px', fontWeight: 'bold' }}>Target outcome (two coins):</p>
+                                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                                    {outcomes.map(o => (
+                                        <button
+                                            key={o}
+                                            onClick={() => setTargetOutcome(o)}
+                                            style={{
+                                                padding: '12px 20px',
+                                                background: targetOutcome === o ? colors.primary : colors.card,
+                                                border: `2px solid ${targetOutcome === o ? colors.primary : colors.muted}`,
+                                                borderRadius: '8px',
+                                                color: '#fff',
+                                                fontSize: '16px',
+                                                fontWeight: 'bold',
+                                                cursor: 'pointer',
+                                                transition: 'all 0.2s'
+                                            }}
+                                        >
+                                            {o}
+                                            <br />
+                                            <span style={{ fontSize: '12px', opacity: 0.7 }}>P = ¼</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                            
+                            {/* Number of experiments selector */}
+                            <div style={{ marginBottom: '25px' }}>
+                                <p style={{ marginBottom: '10px', fontWeight: 'bold' }}>Number of experiments:</p>
+                                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                                    {[2, 3, 4, 5].map(n => (
+                                        <button
+                                            key={n}
+                                            onClick={() => setNumExperiments(n)}
+                                            style={{
+                                                width: '50px',
+                                                height: '50px',
+                                                background: numExperiments === n ? colors.secondary : colors.card,
+                                                border: `2px solid ${numExperiments === n ? colors.secondary : colors.muted}`,
+                                                borderRadius: '8px',
+                                                color: '#fff',
+                                                fontSize: '20px',
+                                                fontWeight: 'bold',
+                                                cursor: 'pointer',
+                                                transition: 'all 0.2s'
+                                            }}
+                                        >
+                                            {n}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                            
+                            {/* Visual representation of experiments */}
+                            <div style={{ 
+                                padding: '15px', 
+                                background: colors.card, 
+                                borderRadius: '12px',
+                                marginBottom: '20px'
+                            }}>
+                                <p style={{ marginBottom: '10px', color: colors.muted }}>Your experiments:</p>
+                                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}>
+                                    {Array.from({ length: numExperiments }, (_, i) => (
+                                        <div key={i} style={{
+                                            padding: '15px 20px',
+                                            background: colors.primary,
+                                            borderRadius: '8px',
+                                            textAlign: 'center'
+                                        }}>
+                                            <div style={{ fontSize: '12px', opacity: 0.7, marginBottom: '5px' }}>Exp {i + 1}</div>
+                                            <div style={{ fontSize: '20px', fontWeight: 'bold' }}>{targetOutcome}?</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style={{ flex: '1 1 350px' }}>
+                            {/* AND calculation */}
+                            <div style={{ 
+                                padding: '20px', 
+                                background: colors.card, 
+                                borderRadius: '12px',
+                                marginBottom: '15px',
+                                borderLeft: `4px solid ${colors.accent}`
+                            }}>
+                                <h4 style={{ color: colors.accent, marginBottom: '15px' }}>
+                                    AND: Get {targetOutcome} in ALL {numExperiments} experiments
+                                </h4>
+                                <p style={{ marginBottom: '10px', color: colors.muted }}>
+                                    "{targetOutcome} <strong>and</strong> {targetOutcome}{numExperiments > 2 ? ` and ... (${numExperiments} times)` : ''}"
+                                </p>
+                                <div style={{ 
+                                    padding: '15px', 
+                                    background: colors.background, 
+                                    borderRadius: '8px',
+                                    fontFamily: 'monospace'
+                                }}>
+                                    <p>P({targetOutcome})^{numExperiments} = ({targetProb})^{numExperiments}</p>
+                                    <p style={{ marginTop: '5px' }}>= {Array(numExperiments).fill(targetProb).join(' × ')}</p>
+                                    <p style={{ 
+                                        marginTop: '10px', 
+                                        fontSize: '24px', 
+                                        color: colors.accent,
+                                        fontWeight: 'bold'
+                                    }}>
+                                        = {probAnd.toFixed(6)} ({(probAnd * 100).toFixed(2)}%)
+                                    </p>
+                                </div>
+                                <p style={{ marginTop: '10px', fontSize: '14px', color: colors.muted }}>
+                                    Probability <strong>decreases</strong> with more experiments — it's harder to succeed every time!
+                                </p>
+                            </div>
+                            
+                            {/* OR calculation */}
+                            <div style={{ 
+                                padding: '20px', 
+                                background: colors.card, 
+                                borderRadius: '12px',
+                                borderLeft: `4px solid ${colors.warning}`
+                            }}>
+                                <h4 style={{ color: colors.warning, marginBottom: '15px' }}>
+                                    OR: Get {targetOutcome} in AT LEAST ONE experiment
+                                </h4>
+                                <p style={{ marginBottom: '10px', color: colors.muted }}>
+                                    "{targetOutcome} <strong>or</strong> {targetOutcome}{numExperiments > 2 ? ` or ... (${numExperiments} times)` : ''}"
+                                </p>
+                                <div style={{ 
+                                    padding: '15px', 
+                                    background: colors.background, 
+                                    borderRadius: '8px',
+                                    fontFamily: 'monospace'
+                                }}>
+                                    <p>1 - P(not {targetOutcome})^{numExperiments}</p>
+                                    <p style={{ marginTop: '5px' }}>= 1 - ({(1 - targetProb).toFixed(2)})^{numExperiments}</p>
+                                    <p style={{ marginTop: '5px' }}>= 1 - {Math.pow(1 - targetProb, numExperiments).toFixed(6)}</p>
+                                    <p style={{ 
+                                        marginTop: '10px', 
+                                        fontSize: '24px', 
+                                        color: colors.warning,
+                                        fontWeight: 'bold'
+                                    }}>
+                                        = {probOr.toFixed(6)} ({(probOr * 100).toFixed(2)}%)
+                                    </p>
+                                </div>
+                                <p style={{ marginTop: '10px', fontSize: '14px', color: colors.muted }}>
+                                    Probability <strong>increases</strong> with more experiments — more chances to succeed at least once!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {/* Key insight */}
+                    <div style={{ 
+                        marginTop: '20px',
+                        padding: '15px', 
+                        background: 'rgba(99, 102, 241, 0.2)', 
+                        borderRadius: '8px',
+                        border: `1px solid ${colors.primary}`
+                    }}>
+                        <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>Key Insight: AND vs OR</p>
+                        <p style={{ fontSize: '14px' }}>
+                            <strong>AND (intersection)</strong>: Multiply probabilities — P(A ∩ B) = P(A) × P(B) for independent events. Gets smaller with more events.
+                            <br /><br />
+                            <strong>OR (union)</strong>: Use complement — P(at least one) = 1 - P(none). Gets larger with more events.
+                            <br /><br />
+                            This is why casinos love repeat players: the house edge compounds with AND (you must win every time), while your chance of ever winning follows OR (at least one win), but the expected value still favors the house!
+                        </p>
+                    </div>
+                </div>
+            );
+        }
+
+        // Visual 2: Venn Diagram
+        function VennDiagram() {
+            const [hovered, setHovered] = useState(null);
+            
+            const getColor = (region) => {
+                if (hovered === region) return colors.accent;
+                if (hovered === 'intersection' && (region === 'A' || region === 'B')) return colors.warning;
+                return region === 'A' ? colors.primary : colors.secondary;
+            };
+            
+            return (
+                <div style={{ padding: '20px' }}>
+                    <h3 style={{ marginBottom: '20px', color: colors.text }}>Venn Diagram: P(A ∪ B) = P(A) + P(B) - P(A ∩ B)</h3>
+                    
+                    <div style={{ display: 'flex', gap: '40px', alignItems: 'center', flexWrap: 'wrap' }}>
+                        <svg width="350" height="250" style={{ background: colors.card, borderRadius: '12px' }}>
+                            {/* Circle A */}
+                            <circle
+                                cx="130" cy="125" r="80"
+                                fill={getColor('A')}
+                                fillOpacity="0.5"
+                                stroke={colors.primary}
+                                strokeWidth="3"
+                                style={{ cursor: 'pointer', transition: 'all 0.3s' }}
+                                onMouseEnter={() => setHovered('A')}
+                                onMouseLeave={() => setHovered(null)}
+                            />
+                            {/* Circle B */}
+                            <circle
+                                cx="220" cy="125" r="80"
+                                fill={getColor('B')}
+                                fillOpacity="0.5"
+                                stroke={colors.secondary}
+                                strokeWidth="3"
+                                style={{ cursor: 'pointer', transition: 'all 0.3s' }}
+                                onMouseEnter={() => setHovered('B')}
+                                onMouseLeave={() => setHovered(null)}
+                            />
+                            {/* Intersection highlight area */}
+                            <ellipse
+                                cx="175" cy="125" rx="35" ry="70"
+                                fill={hovered === 'intersection' ? colors.accent : 'transparent'}
+                                fillOpacity="0.7"
+                                style={{ cursor: 'pointer' }}
+                                onMouseEnter={() => setHovered('intersection')}
+                                onMouseLeave={() => setHovered(null)}
+                            />
+                            {/* Labels */}
+                            <text x="90" y="125" fill="#fff" fontSize="20" fontWeight="bold">A</text>
+                            <text x="250" y="125" fill="#fff" fontSize="20" fontWeight="bold">B</text>
+                            <text x="165" y="130" fill="#fff" fontSize="14" fontWeight="bold">A∩B</text>
+                        </svg>
+                        
+                        <div style={{ 
+                            padding: '20px', 
+                            background: colors.card, 
+                            borderRadius: '12px',
+                            minWidth: '280px'
+                        }}>
+                            <p style={{ color: colors.muted, marginBottom: '15px' }}>Hover over regions:</p>
+                            
+                            <div style={{ 
+                                padding: '15px', 
+                                background: colors.background, 
+                                borderRadius: '8px',
+                                marginBottom: '15px',
+                                borderLeft: `4px solid ${hovered ? colors.accent : colors.muted}`
+                            }}>
+                                {hovered === 'A' && <p><strong>P(A)</strong> = probability of event A occurring</p>}
+                                {hovered === 'B' && <p><strong>P(B)</strong> = probability of event B occurring</p>}
+                                {hovered === 'intersection' && <p><strong>P(A ∩ B)</strong> = probability of BOTH A and B</p>}
+                                {!hovered && <p style={{ color: colors.muted }}>Hover to explore...</p>}
+                            </div>
+                            
+                            <div style={{ 
+                                padding: '15px', 
+                                background: 'rgba(99, 102, 241, 0.2)', 
+                                borderRadius: '8px',
+                                border: `1px solid ${colors.primary}`
+                            }}>
+                                <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>Addition Rule:</p>
+                                <p style={{ fontFamily: 'monospace', fontSize: '16px' }}>
+                                    P(A ∪ B) = P(A) + P(B) - P(A ∩ B)
+                                </p>
+                                <p style={{ fontSize: '13px', color: colors.muted, marginTop: '8px' }}>
+                                    We subtract P(A ∩ B) to avoid counting the intersection twice!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Visual 3: Conditional Probability Animation
+        function ConditionalProbability() {
+            const [showConditioned, setShowConditioned] = useState(false);
+            
+            const allOutcomes = ['HH', 'HT', 'TH', 'TT'];
+            const eventA = ['HH', 'HT']; // First coin is Heads
+            const eventB = ['HH']; // Both Heads
+            
+            const visibleOutcomes = showConditioned ? eventA : allOutcomes;
+            
+            return (
+                <div style={{ padding: '20px' }}>
+                    <h3 style={{ marginBottom: '20px', color: colors.text }}>Conditional Probability: "Universe Shrinking"</h3>
+                    
+                    <div style={{ display: 'flex', gap: '30px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                        <div style={{ 
+                            padding: '20px', 
+                            background: colors.card, 
+                            borderRadius: '12px',
+                            minWidth: '300px'
+                        }}>
+                            <p style={{ marginBottom: '15px', color: colors.muted }}>
+                                <strong>Question:</strong> What's P(both heads) given first coin is heads?
+                            </p>
+                            
+                            <div style={{ 
+                                display: 'flex', 
+                                gap: '15px', 
+                                marginBottom: '20px',
+                                flexWrap: 'wrap',
+                                justifyContent: 'center'
+                            }}>
+                                {allOutcomes.map(outcome => {
+                                    const isVisible = visibleOutcomes.includes(outcome);
+                                    const isTarget = eventB.includes(outcome);
+                                    
+                                    return (
+                                        <div
+                                            key={outcome}
+                                            style={{
+                                                width: '70px',
+                                                height: '70px',
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                background: isTarget && isVisible ? colors.accent : 
+                                                           isVisible ? colors.primary : '#3a3a4e',
+                                                borderRadius: '8px',
+                                                opacity: isVisible ? 1 : 0.3,
+                                                transform: isVisible ? 'scale(1)' : 'scale(0.8)',
+                                                transition: 'all 0.5s ease'
+                                            }}
+                                        >
+                                            <span style={{ fontSize: '18px', fontWeight: 'bold' }}>{outcome}</span>
+                                            <span style={{ fontSize: '12px', marginTop: '4px' }}>
+                                                {isVisible ? (showConditioned ? '½' : '¼') : '—'}
+                                            </span>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                            
+                            <button
+                                onClick={() => setShowConditioned(!showConditioned)}
+                                style={{
+                                    width: '100%',
+                                    padding: '15px',
+                                    background: showConditioned ? colors.accent : colors.primary,
+                                    border: 'none',
+                                    borderRadius: '8px',
+                                    color: '#fff',
+                                    fontSize: '16px',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.3s'
+                                }}
+                            >
+                                {showConditioned ? '← Show All Outcomes' : 'Given: First Coin is Heads →'}
+                            </button>
+                        </div>
+                        
+                        <div style={{ 
+                            padding: '20px', 
+                            background: colors.card, 
+                            borderRadius: '12px',
+                            flex: 1,
+                            minWidth: '280px'
+                        }}>
+                            <h4 style={{ marginBottom: '15px', color: colors.accent }}>
+                                {showConditioned ? 'After Conditioning' : 'Before Conditioning'}
+                            </h4>
+                            
+                            {!showConditioned ? (
+                                <div>
+                                    <p style={{ marginBottom: '10px' }}>Sample space: {'{HH, HT, TH, TT}'}</p>
+                                    <p style={{ marginBottom: '10px' }}>Each outcome has P = ¼</p>
+                                    <p style={{ 
+                                        padding: '10px', 
+                                        background: colors.background, 
+                                        borderRadius: '6px',
+                                        fontFamily: 'monospace'
+                                    }}>
+                                        P(both heads) = P(HH) = <strong>¼</strong>
+                                    </p>
+                                </div>
+                            ) : (
+                                <div>
+                                    <p style={{ marginBottom: '10px' }}>
+                                        <strong>Universe shrinks!</strong> Only {'{HH, TH}'} remain
+                                    </p>
+                                    <p style={{ marginBottom: '10px' }}>Each outcome now has P = ½</p>
+                                    <p style={{ 
+                                        padding: '10px', 
+                                        background: 'rgba(16, 185, 129, 0.2)', 
+                                        borderRadius: '6px',
+                                        fontFamily: 'monospace',
+                                        border: `1px solid ${colors.accent}`
+                                    }}>
+                                        P(both heads | first heads) = <strong>½</strong>
+                                    </p>
+                                    <p style={{ marginTop: '15px', fontSize: '14px', color: colors.muted }}>
+                                        The information <em>doubled</em> our probability from ¼ to ½!
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Visual 4: Bayes Theorem Flow
+        function BayesTheorem() {
+            const [step, setStep] = useState(0);
+            
+            const steps = [
+                { 
+                    name: 'Prior', 
+                    symbol: 'P(A)', 
+                    color: colors.primary,
+                    desc: 'What we believed BEFORE seeing evidence',
+                    example: 'P(Disease) = 1% of population has disease'
+                },
+                { 
+                    name: 'Likelihood', 
+                    symbol: 'P(B|A)', 
+                    color: colors.secondary,
+                    desc: 'How likely is evidence IF A is true',
+                    example: 'P(Positive|Disease) = 99% test accuracy'
+                },
+                { 
+                    name: 'Evidence', 
+                    symbol: 'P(B)', 
+                    color: colors.warning,
+                    desc: 'How likely is evidence overall',
+                    example: 'P(Positive) = all positive tests (true + false)'
+                },
+                { 
+                    name: 'Posterior', 
+                    symbol: 'P(A|B)', 
+                    color: colors.accent,
+                    desc: 'Updated belief AFTER seeing evidence',
+                    example: 'P(Disease|Positive) = ~50% (surprisingly low!)'
+                }
+            ];
+            
+            return (
+                <div style={{ padding: '20px' }}>
+                    <h3 style={{ marginBottom: '20px', color: colors.text }}>Bayes' Theorem: Updating Beliefs</h3>
+                    
+                    <div style={{ 
+                        padding: '20px', 
+                        background: colors.card, 
+                        borderRadius: '12px',
+                        marginBottom: '20px'
+                    }}>
+                        <div style={{ 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            justifyContent: 'center',
+                            gap: '15px',
+                            flexWrap: 'wrap',
+                            fontSize: '24px',
+                            fontFamily: 'Georgia, serif',
+                            padding: '20px'
+                        }}>
+                            <span style={{ 
+                                color: step === 3 ? colors.accent : colors.muted,
+                                transition: 'all 0.3s',
+                                fontWeight: step === 3 ? 'bold' : 'normal'
+                            }}>P(A|B)</span>
+                            <span>=</span>
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <div style={{ display: 'flex', gap: '8px' }}>
+                                    <span style={{ 
+                                        color: step === 1 ? colors.secondary : colors.muted,
+                                        transition: 'all 0.3s',
+                                        fontWeight: step === 1 ? 'bold' : 'normal'
+                                    }}>P(B|A)</span>
+                                    <span>×</span>
+                                    <span style={{ 
+                                        color: step === 0 ? colors.primary : colors.muted,
+                                        transition: 'all 0.3s',
+                                        fontWeight: step === 0 ? 'bold' : 'normal'
+                                    }}>P(A)</span>
+                                </div>
+                                <div style={{ 
+                                    width: '100%', 
+                                    height: '2px', 
+                                    background: '#fff', 
+                                    margin: '8px 0' 
+                                }}></div>
+                                <span style={{ 
+                                    color: step === 2 ? colors.warning : colors.muted,
+                                    transition: 'all 0.3s',
+                                    fontWeight: step === 2 ? 'bold' : 'normal'
+                                }}>P(B)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
+                        {steps.map((s, i) => (
+                            <button
+                                key={i}
+                                onClick={() => setStep(i)}
+                                style={{
+                                    padding: '12px 20px',
+                                    background: step === i ? s.color : colors.card,
+                                    border: `2px solid ${s.color}`,
+                                    borderRadius: '8px',
+                                    color: '#fff',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s',
+                                    flex: '1 1 120px'
+                                }}
+                            >
+                                {s.name}
+                            </button>
+                        ))}
+                    </div>
+                    
+                    <div style={{ 
+                        padding: '25px', 
+                        background: colors.card, 
+                        borderRadius: '12px',
+                        borderLeft: `4px solid ${steps[step].color}`
+                    }}>
+                        <h4 style={{ color: steps[step].color, marginBottom: '10px', fontSize: '20px' }}>
+                            {steps[step].name}: {steps[step].symbol}
+                        </h4>
+                        <p style={{ fontSize: '16px', marginBottom: '15px' }}>{steps[step].desc}</p>
+                        <div style={{ 
+                            padding: '15px', 
+                            background: colors.background, 
+                            borderRadius: '8px',
+                            fontStyle: 'italic'
+                        }}>
+                            <strong>Example:</strong> {steps[step].example}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Visual: Naive Bayes Explained - Step by Step
+        function NaiveBayesExplained() {
+            const [step, setStep] = useState(0);
+            
+            const steps = [
+                { 
+                    title: 'The Question', 
+                    subtitle: 'What are we trying to do?'
+                },
+                { 
+                    title: 'The Math Setup', 
+                    subtitle: 'Translating to probability'
+                },
+                { 
+                    title: 'Apply Bayes Theorem', 
+                    subtitle: 'Flip the conditional'
+                },
+                { 
+                    title: 'The "Naive" Assumption', 
+                    subtitle: 'The key simplification'
+                },
+                { 
+                    title: 'The Final Formula', 
+                    subtitle: 'Putting it all together'
+                }
+            ];
+            
+            return (
+                <div style={{ padding: '20px' }}>
+                    <h3 style={{ marginBottom: '20px', color: colors.text }}>Naive Bayes: Step-by-Step Explanation</h3>
+                    
+                    {/* Step navigation */}
+                    <div style={{ 
+                        display: 'flex', 
+                        gap: '5px', 
+                        marginBottom: '25px',
+                        flexWrap: 'wrap'
+                    }}>
+                        {steps.map((s, i) => (
+                            <button
+                                key={i}
+                                onClick={() => setStep(i)}
+                                style={{
+                                    padding: '10px 16px',
+                                    background: step === i ? colors.primary : colors.card,
+                                    border: `2px solid ${step >= i ? colors.primary : colors.muted}`,
+                                    borderRadius: '8px',
+                                    color: '#fff',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s',
+                                    opacity: step >= i ? 1 : 0.5,
+                                    flex: '1 1 150px'
+                                }}
+                            >
+                                <div style={{ fontSize: '12px', opacity: 0.7 }}>Step {i + 1}</div>
+                                <div style={{ fontWeight: 'bold' }}>{s.title}</div>
+                            </button>
+                        ))}
+                    </div>
+                    
+                    {/* Step content */}
+                    <div style={{ 
+                        background: colors.card, 
+                        borderRadius: '12px',
+                        padding: '25px',
+                        minHeight: '400px'
+                    }}>
+                        {step === 0 && (
+                            <div>
+                                <h4 style={{ color: colors.accent, marginBottom: '20px', fontSize: '24px' }}>
+                                    The Question: Given features X, predict class Y
+                                </h4>
+                                
+                                <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap', marginBottom: '25px' }}>
+                                    {/* Doctor analogy */}
+                                    <div style={{ flex: '1 1 300px' }}>
+                                        <div style={{ 
+                                            padding: '20px', 
+                                            background: colors.background, 
+                                            borderRadius: '10px',
+                                            marginBottom: '15px'
+                                        }}>
+                                            <p style={{ fontSize: '18px', marginBottom: '15px' }}>
+                                                🩺 <strong>Think like a doctor:</strong>
+                                            </p>
+                                            <div style={{ marginLeft: '20px' }}>
+                                                <p style={{ marginBottom: '10px' }}>
+                                                    <span style={{ color: colors.secondary }}>Patient shows:</span> fever, cough, fatigue
+                                                </p>
+                                                <p style={{ marginBottom: '10px' }}>
+                                                    <span style={{ color: colors.accent }}>Doctor asks:</span> Is it Flu, Cold, or COVID?
+                                                </p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div style={{ 
+                                            padding: '20px', 
+                                            background: 'rgba(99, 102, 241, 0.2)', 
+                                            borderRadius: '10px',
+                                            border: `1px solid ${colors.primary}`
+                                        }}>
+                                            <p style={{ fontWeight: 'bold', marginBottom: '10px' }}>In ML terms:</p>
+                                            <p><span style={{ color: colors.secondary }}>X = features</span> (what we observe)</p>
+                                            <p><span style={{ color: colors.accent }}>Y = class</span> (what we predict)</p>
+                                        </div>
+                                    </div>
+                                    
+                                    {/* Visual representation */}
+                                    <div style={{ flex: '1 1 300px' }}>
+                                        <svg width="100%" height="250" viewBox="0 0 350 250">
+                                            {/* Features box */}
+                                            <rect x="20" y="30" width="140" height="180" rx="10" 
+                                                fill={colors.secondary} fillOpacity="0.3" stroke={colors.secondary} strokeWidth="2" />
+                                            <text x="90" y="55" fill={colors.secondary} fontSize="16" fontWeight="bold" textAnchor="middle">Features X</text>
+                                            <text x="90" y="85" fill="#fff" fontSize="14" textAnchor="middle">x₁: Fever ✓</text>
+                                            <text x="90" y="110" fill="#fff" fontSize="14" textAnchor="middle">x₂: Cough ✓</text>
+                                            <text x="90" y="135" fill="#fff" fontSize="14" textAnchor="middle">x₃: Fatigue ✓</text>
+                                            <text x="90" y="160" fill="#fff" fontSize="14" textAnchor="middle">x₄: Headache ✗</text>
+                                            <text x="90" y="185" fill={colors.muted} fontSize="12" textAnchor="middle">...</text>
+                                            
+                                            {/* Arrow */}
+                                            <path d="M 170 120 L 210 120" stroke={colors.accent} strokeWidth="3" markerEnd="url(#arrowhead)" />
+                                            <defs>
+                                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                                    <polygon points="0 0, 10 3.5, 0 7" fill={colors.accent} />
+                                                </marker>
+                                            </defs>
+                                            <text x="190" y="105" fill={colors.accent} fontSize="12" textAnchor="middle">predict</text>
+                                            
+                                            {/* Class box */}
+                                            <rect x="220" y="60" width="110" height="120" rx="10" 
+                                                fill={colors.accent} fillOpacity="0.3" stroke={colors.accent} strokeWidth="2" />
+                                            <text x="275" y="85" fill={colors.accent} fontSize="16" fontWeight="bold" textAnchor="middle">Class Y</text>
+                                            <text x="275" y="115" fill="#fff" fontSize="14" textAnchor="middle">Flu?</text>
+                                            <text x="275" y="140" fill="#fff" fontSize="14" textAnchor="middle">Cold?</text>
+                                            <text x="275" y="165" fill="#fff" fontSize="14" textAnchor="middle">COVID?</text>
+                                        </svg>
+                                    </div>
+                                </div>
+                                
+                                <div style={{ 
+                                    padding: '15px', 
+                                    background: colors.background, 
+                                    borderRadius: '8px',
+                                    textAlign: 'center',
+                                    fontSize: '18px'
+                                }}>
+                                    <strong>Goal:</strong> Find the class Y that is <span style={{ color: colors.accent }}>most likely</span> given features X
+                                </div>
+                            </div>
+                        )}
+                        
+                        {step === 1 && (
+                            <div>
+                                <h4 style={{ color: colors.accent, marginBottom: '20px', fontSize: '24px' }}>
+                                    The Math: What probability do we need?
+                                </h4>
+                                
+                                <div style={{ 
+                                    padding: '25px', 
+                                    background: colors.background, 
+                                    borderRadius: '10px',
+                                    marginBottom: '20px',
+                                    textAlign: 'center'
+                                }}>
+                                    <p style={{ fontSize: '16px', marginBottom: '15px' }}>We want to find:</p>
+                                    <p style={{ 
+                                        fontSize: '32px', 
+                                        fontFamily: 'Georgia, serif',
+                                        color: colors.accent
+                                    }}>
+                                        P( Y | X )
+                                    </p>
+                                    <p style={{ fontSize: '16px', marginTop: '15px', color: colors.muted }}>
+                                        "Probability of class Y, <strong>given</strong> we observed features X"
+                                    </p>
+                                </div>
+                                
+                                <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+                                    <div style={{ 
+                                        flex: '1 1 250px',
+                                        padding: '20px', 
+                                        background: colors.background, 
+                                        borderRadius: '10px'
+                                    }}>
+                                        <p style={{ fontWeight: 'bold', marginBottom: '10px', color: colors.secondary }}>
+                                            For our medical example:
+                                        </p>
+                                        <p style={{ fontFamily: 'monospace', fontSize: '14px' }}>
+                                            P(Flu | fever, cough, fatigue)
+                                        </p>
+                                        <p style={{ fontFamily: 'monospace', fontSize: '14px', marginTop: '5px' }}>
+                                            P(Cold | fever, cough, fatigue)
+                                        </p>
+                                        <p style={{ fontFamily: 'monospace', fontSize: '14px', marginTop: '5px' }}>
+                                            P(COVID | fever, cough, fatigue)
+                                        </p>
+                                    </div>
+                                    
+                                    <div style={{ 
+                                        flex: '1 1 250px',
+                                        padding: '20px', 
+                                        background: 'rgba(16, 185, 129, 0.2)', 
+                                        borderRadius: '10px',
+                                        border: `1px solid ${colors.accent}`
+                                    }}>
+                                        <p style={{ fontWeight: 'bold', marginBottom: '10px', color: colors.accent }}>
+                                            Then pick the highest:
+                                        </p>
+                                        <p style={{ fontSize: '14px' }}>
+                                            If P(Flu|X) = 0.6<br />
+                                            If P(Cold|X) = 0.3<br />
+                                            If P(COVID|X) = 0.1<br /><br />
+                                            → Predict: <strong>Flu</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div style={{ 
+                                    marginTop: '20px',
+                                    padding: '15px', 
+                                    background: 'rgba(239, 68, 68, 0.2)', 
+                                    borderRadius: '8px',
+                                    border: '1px solid #ef4444'
+                                }}>
+                                    <p><strong>Problem:</strong> P(Y | X) is hard to compute directly when X has many features!</p>
+                                    <p style={{ marginTop: '5px', color: colors.muted }}>
+                                        Solution: Use Bayes' Theorem to flip it around...
+                                    </p>
+                                </div>
+                            </div>
+                        )}
+                        
+                        {step === 2 && (
+                            <div>
+                                <h4 style={{ color: colors.accent, marginBottom: '20px', fontSize: '24px' }}>
+                                    Apply Bayes' Theorem: Flip the conditional
+                                </h4>
+                                
+                                <div style={{ 
+                                    padding: '25px', 
+                                    background: colors.background, 
+                                    borderRadius: '10px',
+                                    marginBottom: '20px'
+                                }}>
+                                    <p style={{ textAlign: 'center', marginBottom: '20px', fontSize: '16px' }}>
+                                        Bayes' Theorem lets us rewrite P(Y|X):
+                                    </p>
+                                    <div style={{ 
+                                        textAlign: 'center',
+                                        fontSize: '24px', 
+                                        fontFamily: 'Georgia, serif',
+                                        padding: '20px',
+                                        background: colors.card,
+                                        borderRadius: '8px'
+                                    }}>
+                                        <span style={{ color: colors.accent }}>P(Y|X)</span>
+                                        <span> = </span>
+                                        <span style={{ display: 'inline-flex', flexDirection: 'column', verticalAlign: 'middle' }}>
+                                            <span><span style={{ color: colors.secondary }}>P(X|Y)</span> × <span style={{ color: colors.primary }}>P(Y)</span></span>
+                                            <span style={{ borderTop: '2px solid #fff', paddingTop: '5px' }}>P(X)</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', marginBottom: '20px' }}>
+                                    <div style={{ 
+                                        flex: '1 1 200px',
+                                        padding: '15px', 
+                                        background: colors.background, 
+                                        borderRadius: '8px',
+                                        borderLeft: `4px solid ${colors.accent}`
+                                    }}>
+                                        <p style={{ color: colors.accent, fontWeight: 'bold' }}>P(Y|X)</p>
+                                        <p style={{ fontSize: '14px', color: colors.muted }}>Posterior</p>
+                                        <p style={{ fontSize: '13px', marginTop: '5px' }}>What we want: probability of disease given symptoms</p>
+                                    </div>
+                                    <div style={{ 
+                                        flex: '1 1 200px',
+                                        padding: '15px', 
+                                        background: colors.background, 
+                                        borderRadius: '8px',
+                                        borderLeft: `4px solid ${colors.secondary}`
+                                    }}>
+                                        <p style={{ color: colors.secondary, fontWeight: 'bold' }}>P(X|Y)</p>
+                                        <p style={{ fontSize: '14px', color: colors.muted }}>Likelihood</p>
+                                        <p style={{ fontSize: '13px', marginTop: '5px' }}>Easier! "If patient has flu, how likely are these symptoms?"</p>
+                                    </div>
+                                    <div style={{ 
+                                        flex: '1 1 200px',
+                                        padding: '15px', 
+                                        background: colors.background, 
+                                        borderRadius: '8px',
+                                        borderLeft: `4px solid ${colors.primary}`
+                                    }}>
+                                        <p style={{ color: colors.primary, fontWeight: 'bold' }}>P(Y)</p>
+                                        <p style={{ fontSize: '14px', color: colors.muted }}>Prior</p>
+                                        <p style={{ fontSize: '13px', marginTop: '5px' }}>Base rate: "How common is flu in general?"</p>
+                                    </div>
+                                </div>
+                                
+                                <div style={{ 
+                                    padding: '15px', 
+                                    background: 'rgba(99, 102, 241, 0.2)', 
+                                    borderRadius: '8px',
+                                    border: `1px solid ${colors.primary}`
+                                }}>
+                                    <p><strong>Key insight:</strong> Since P(X) is the same for all classes, we can ignore it when comparing!</p>
+                                    <p style={{ marginTop: '10px', fontFamily: 'monospace', textAlign: 'center' }}>
+                                        P(Y|X) ∝ P(X|Y) × P(Y)
+                                    </p>
+                                </div>
+                            </div>
+                        )}
+                        
+                        {step === 3 && (
+                            <div>
+                                <h4 style={{ color: colors.accent, marginBottom: '20px', fontSize: '24px' }}>
+                                    The "Naive" Assumption: Features are independent
+                                </h4>
+                                
+                                <div style={{ 
+                                    padding: '20px', 
+                                    background: 'rgba(239, 68, 68, 0.2)', 
+                                    borderRadius: '10px',
+                                    border: '1px solid #ef4444',
+                                    marginBottom: '20px'
+                                }}>
+                                    <p style={{ fontWeight: 'bold', marginBottom: '10px' }}>The Problem:</p>
+                                    <p style={{ fontFamily: 'monospace' }}>
+                                        P(fever, cough, fatigue | Flu) = ???
+                                    </p>
+                                    <p style={{ marginTop: '10px', fontSize: '14px', color: colors.muted }}>
+                                        Computing the joint probability of many features together is hard — we'd need huge amounts of data!
+                                    </p>
+                                </div>
+                                
+                                <div style={{ 
+                                    padding: '20px', 
+                                    background: 'rgba(16, 185, 129, 0.2)', 
+                                    borderRadius: '10px',
+                                    border: `1px solid ${colors.accent}`,
+                                    marginBottom: '20px'
+                                }}>
+                                    <p style={{ fontWeight: 'bold', marginBottom: '10px', color: colors.accent }}>The "Naive" Solution:</p>
+                                    <p style={{ marginBottom: '15px' }}>
+                                        <strong>Assume</strong> features are independent given the class. This lets us multiply!
+                                    </p>
+                                    <div style={{ 
+                                        padding: '15px', 
+                                        background: colors.background, 
+                                        borderRadius: '8px',
+                                        fontFamily: 'monospace',
+                                        fontSize: '14px'
+                                    }}>
+                                        <p>P(x₁, x₂, x₃ | Y) = P(x₁|Y) × P(x₂|Y) × P(x₃|Y)</p>
+                                        <p style={{ marginTop: '10px', color: colors.accent }}>
+                                            P(fever, cough, fatigue | Flu) = P(fever|Flu) × P(cough|Flu) × P(fatigue|Flu)
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+                                    <div style={{ 
+                                        flex: '1 1 200px',
+                                        padding: '15px', 
+                                        background: colors.background, 
+                                        borderRadius: '8px'
+                                    }}>
+                                        <p style={{ fontWeight: 'bold', marginBottom: '10px' }}>Why "Naive"?</p>
+                                        <p style={{ fontSize: '14px' }}>
+                                            In reality, fever and fatigue often come together — they're NOT independent. 
+                                            But we pretend they are anyway!
+                                        </p>
+                                    </div>
+                                    <div style={{ 
+                                        flex: '1 1 200px',
+                                        padding: '15px', 
+                                        background: colors.background, 
+                                        borderRadius: '8px'
+                                    }}>
+                                        <p style={{ fontWeight: 'bold', marginBottom: '10px' }}>Why does it work?</p>
+                                        <p style={{ fontSize: '14px' }}>
+                                            Even though the assumption is wrong, the classifier often still picks the right class. 
+                                            We only need to rank classes, not get exact probabilities!
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                        
+                        {step === 4 && (
+                            <div>
+                                <h4 style={{ color: colors.accent, marginBottom: '20px', fontSize: '24px' }}>
+                                    The Final Formula: Putting it all together
+                                </h4>
+                                
+                                <div style={{ 
+                                    padding: '25px', 
+                                    background: colors.background, 
+                                    borderRadius: '10px',
+                                    marginBottom: '20px',
+                                    textAlign: 'center'
+                                }}>
+                                    <p style={{ marginBottom: '15px', fontSize: '16px' }}>Naive Bayes Classification:</p>
+                                    <div style={{ 
+                                        fontSize: '20px', 
+                                        fontFamily: 'Georgia, serif',
+                                        padding: '20px',
+                                        background: colors.card,
+                                        borderRadius: '8px'
+                                    }}>
+                                        <p style={{ color: colors.accent }}>
+                                            Ŷ = argmax<sub>Y</sub> [ P(Y) × ∏ P(xᵢ|Y) ]
+                                        </p>
+                                    </div>
+                                    <p style={{ marginTop: '15px', color: colors.muted, fontSize: '14px' }}>
+                                        "Pick the class Y that maximizes: prior × product of likelihoods"
+                                    </p>
+                                </div>
+                                
+                                <div style={{ 
+                                    padding: '20px', 
+                                    background: colors.background, 
+                                    borderRadius: '10px',
+                                    marginBottom: '20px'
+                                }}>
+                                    <p style={{ fontWeight: 'bold', marginBottom: '15px' }}>Example calculation:</p>
+                                    <div style={{ fontFamily: 'monospace', fontSize: '14px' }}>
+                                        <p><strong>For Flu:</strong></p>
+                                        <p style={{ marginLeft: '20px', color: colors.primary }}>P(Flu) = 0.3</p>
+                                        <p style={{ marginLeft: '20px', color: colors.secondary }}>P(fever|Flu) = 0.9 × P(cough|Flu) = 0.8 × P(fatigue|Flu) = 0.7</p>
+                                        <p style={{ marginLeft: '20px', color: colors.accent }}>Score = 0.3 × 0.9 × 0.8 × 0.7 = <strong>0.151</strong></p>
+                                        
+                                        <p style={{ marginTop: '15px' }}><strong>For Cold:</strong></p>
+                                        <p style={{ marginLeft: '20px', color: colors.primary }}>P(Cold) = 0.5</p>
+                                        <p style={{ marginLeft: '20px', color: colors.secondary }}>P(fever|Cold) = 0.3 × P(cough|Cold) = 0.9 × P(fatigue|Cold) = 0.4</p>
+                                        <p style={{ marginLeft: '20px', color: colors.accent }}>Score = 0.5 × 0.3 × 0.9 × 0.4 = <strong>0.054</strong></p>
+                                    </div>
+                                    <p style={{ 
+                                        marginTop: '20px', 
+                                        padding: '10px', 
+                                        background: 'rgba(16, 185, 129, 0.3)', 
+                                        borderRadius: '6px',
+                                        textAlign: 'center'
+                                    }}>
+                                        0.151 &gt; 0.054 → <strong>Predict: Flu</strong> ✓
+                                    </p>
+                                </div>
+                                
+                                <div style={{ 
+                                    padding: '15px', 
+                                    background: 'rgba(99, 102, 241, 0.2)', 
+                                    borderRadius: '8px',
+                                    border: `1px solid ${colors.primary}`
+                                }}>
+                                    <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>Summary - The 3 Steps of Naive Bayes:</p>
+                                    <p>1. Calculate P(Y) from training data (how often each class appears)</p>
+                                    <p>2. Calculate P(xᵢ|Y) from training data (how often each feature appears in each class)</p>
+                                    <p>3. For new data: multiply them together, pick the class with highest score</p>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                    
+                    {/* Navigation buttons */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+                        <button
+                            onClick={() => setStep(Math.max(0, step - 1))}
+                            disabled={step === 0}
+                            style={{
+                                padding: '12px 24px',
+                                background: step === 0 ? colors.card : colors.primary,
+                                border: 'none',
+                                borderRadius: '8px',
+                                color: '#fff',
+                                cursor: step === 0 ? 'not-allowed' : 'pointer',
+                                opacity: step === 0 ? 0.5 : 1
+                            }}
+                        >
+                            ← Previous
+                        </button>
+                        <button
+                            onClick={() => setStep(Math.min(steps.length - 1, step + 1))}
+                            disabled={step === steps.length - 1}
+                            style={{
+                                padding: '12px 24px',
+                                background: step === steps.length - 1 ? colors.card : colors.accent,
+                                border: 'none',
+                                borderRadius: '8px',
+                                color: '#fff',
+                                cursor: step === steps.length - 1 ? 'not-allowed' : 'pointer',
+                                opacity: step === steps.length - 1 ? 0.5 : 1
+                            }}
+                        >
+                            Next →
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        // Visual 5: Naive Bayes Soccer Example - Detailed
+        function NaiveBayesSoccer() {
+            const [showCalculation, setShowCalculation] = useState(false);
+            const [step, setStep] = useState(0);
+            
+            const data = [
+                { outlook: 'Rainy', temp: 'Hot', humidity: 'High', windy: 'No', play: 'No' },
+                { outlook: 'Rainy', temp: 'Mild', humidity: 'High', windy: 'No', play: 'No' },
+                { outlook: 'Rainy', temp: 'Hot', humidity: 'High', windy: 'Yes', play: 'No' },
+                { outlook: 'Sunny', temp: 'Cool', humidity: 'Normal', windy: 'Yes', play: 'No' },
+                { outlook: 'Sunny', temp: 'Mild', humidity: 'High', windy: 'Yes', play: 'No' },
+                { outlook: 'Overcast', temp: 'Hot', humidity: 'High', windy: 'No', play: 'Yes' },
+                { outlook: 'Overcast', temp: 'Hot', humidity: 'Normal', windy: 'No', play: 'Yes' },
+                { outlook: 'Rainy', temp: 'Cool', humidity: 'Normal', windy: 'No', play: 'Yes' },
+                { outlook: 'Sunny', temp: 'Mild', humidity: 'High', windy: 'No', play: 'Yes' },
+                { outlook: 'Sunny', temp: 'Cool', humidity: 'Normal', windy: 'No', play: 'Yes' },
+                { outlook: 'Sunny', temp: 'Mild', humidity: 'Normal', windy: 'No', play: 'Yes' },
+                { outlook: 'Overcast', temp: 'Cool', humidity: 'Normal', windy: 'Yes', play: 'Yes' },
+                { outlook: 'Overcast', temp: 'Mild', humidity: 'High', windy: 'Yes', play: 'Yes' },
+                { outlook: 'Rainy', temp: 'Mild', humidity: 'Normal', windy: 'Yes', play: 'Yes' }
+            ];
+            
+            const todayConditions = { outlook: 'Sunny', temp: 'Hot', humidity: 'Normal', windy: 'No' };
+            
+            return (
+                <div style={{ padding: '20px' }}>
+                    <h3 style={{ marginBottom: '20px', color: colors.text }}>Naive Bayes: Soccer Match Prediction (Detailed)</h3>
+                    
+                    {/* Step selector */}
+                    <div style={{ display: 'flex', gap: '5px', marginBottom: '20px', flexWrap: 'wrap' }}>
+                        {['1. The Data', '2. Count for Yes', '3. Count for No', '4. Calculate', '5. Predict'].map((label, i) => (
+                            <button
+                                key={i}
+                                onClick={() => setStep(i)}
+                                style={{
+                                    padding: '10px 15px',
+                                    background: step === i ? colors.primary : colors.card,
+                                    border: `2px solid ${step >= i ? colors.primary : colors.muted}`,
+                                    borderRadius: '8px',
+                                    color: '#fff',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s',
+                                    flex: '1 1 120px'
+                                }}
+                            >
+                                {label}
+                            </button>
+                        ))}
+                    </div>
+                    
+                    {/* Step 0: The Data */}
+                    {step === 0 && (
+                        <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+                            <div style={{ flex: '1 1 500px' }}>
+                                <div style={{ 
+                                    background: colors.card, 
+                                    borderRadius: '12px',
+                                    overflow: 'hidden'
+                                }}>
+                                    <div style={{ padding: '15px', background: colors.primary }}>
+                                        <strong>Historical Data: 14 Days of Weather & Match Decisions</strong>
+                                    </div>
+                                    <div style={{ maxHeight: '350px', overflow: 'auto' }}>
+                                        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px' }}>
+                                            <thead>
+                                                <tr style={{ background: colors.background }}>
+                                                    <th style={{ padding: '10px', textAlign: 'left' }}>#</th>
+                                                    <th style={{ padding: '10px', textAlign: 'left' }}>Outlook</th>
+                                                    <th style={{ padding: '10px', textAlign: 'left' }}>Temp</th>
+                                                    <th style={{ padding: '10px', textAlign: 'left' }}>Humidity</th>
+                                                    <th style={{ padding: '10px', textAlign: 'left' }}>Windy</th>
+                                                    <th style={{ padding: '10px', textAlign: 'left' }}>Played?</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {data.map((row, i) => (
+                                                    <tr key={i} style={{ 
+                                                        background: row.play === 'Yes' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)'
+                                                    }}>
+                                                        <td style={{ padding: '8px', color: colors.muted }}>{i + 1}</td>
+                                                        <td style={{ padding: '8px' }}>{row.outlook}</td>
+                                                        <td style={{ padding: '8px' }}>{row.temp}</td>
+                                                        <td style={{ padding: '8px' }}>{row.humidity}</td>
+                                                        <td style={{ padding: '8px' }}>{row.windy}</td>
+                                                        <td style={{ 
+                                                            padding: '8px', 
+                                                            fontWeight: 'bold',
+                                                            color: row.play === 'Yes' ? colors.accent : '#ef4444'
+                                                        }}>{row.play}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style={{ flex: '1 1 250px' }}>
+                                <div style={{ 
+                                    padding: '20px', 
+                                    background: colors.card, 
+                                    borderRadius: '12px',
+                                    marginBottom: '15px'
+                                }}>
+                                    <h4 style={{ marginBottom: '15px', color: colors.warning }}>📅 Today's Conditions:</h4>
+                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                                        <div style={{ padding: '10px', background: colors.background, borderRadius: '6px' }}>
+                                            <span style={{ color: colors.muted, fontSize: '12px' }}>Outlook</span><br />
+                                            <strong>Sunny</strong>
+                                        </div>
+                                        <div style={{ padding: '10px', background: colors.background, borderRadius: '6px' }}>
+                                            <span style={{ color: colors.muted, fontSize: '12px' }}>Temperature</span><br />
+                                            <strong>Hot</strong>
+                                        </div>
+                                        <div style={{ padding: '10px', background: colors.background, borderRadius: '6px' }}>
+                                            <span style={{ color: colors.muted, fontSize: '12px' }}>Humidity</span><br />
+                                            <strong>Normal</strong>
+                                        </div>
+                                        <div style={{ padding: '10px', background: colors.background, borderRadius: '6px' }}>
+                                            <span style={{ color: colors.muted, fontSize: '12px' }}>Windy</span><br />
+                                            <strong>No</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style={{ 
+                                    padding: '20px', 
+                                    background: 'rgba(99, 102, 241, 0.2)', 
+                                    borderRadius: '12px',
+                                    border: `1px solid ${colors.primary}`
+                                }}>
+                                    <h4 style={{ marginBottom: '10px' }}>❓ The Question:</h4>
+                                    <p>Based on historical data, should we play the match today?</p>
+                                    <p style={{ marginTop: '10px', fontFamily: 'monospace', color: colors.accent }}>
+                                        P(Yes | Sunny, Hot, Normal, No wind) = ?
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                    
+                    {/* Step 1: Count for Yes */}
+                    {step === 1 && (
+                        <div>
+                            <div style={{ 
+                                padding: '20px', 
+                                background: 'rgba(16, 185, 129, 0.2)', 
+                                borderRadius: '12px',
+                                border: `1px solid ${colors.accent}`,
+                                marginBottom: '20px'
+                            }}>
+                                <h4 style={{ color: colors.accent, marginBottom: '15px' }}>
+                                    Step 1: Count occurrences when Match = Yes (9 days total)
+                                </h4>
+                                <p style={{ color: colors.muted, marginBottom: '15px' }}>
+                                    We look ONLY at the 9 rows where the match was played, and count how often each feature appears.
+                                </p>
+                            </div>
+                            
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '15px' }}>
+                                <div style={{ padding: '20px', background: colors.card, borderRadius: '12px' }}>
+                                    <h5 style={{ color: colors.primary, marginBottom: '15px' }}>P(Yes) - Prior</h5>
+                                    <p style={{ fontSize: '14px', marginBottom: '10px' }}>How often was the match played?</p>
+                                    <div style={{ padding: '10px', background: colors.background, borderRadius: '6px', textAlign: 'center' }}>
+                                        <span style={{ fontSize: '24px', fontWeight: 'bold' }}>9</span>
+                                        <span style={{ fontSize: '18px' }}> / 14</span>
+                                    </div>
+                                    <p style={{ fontSize: '12px', color: colors.muted, marginTop: '10px', textAlign: 'center' }}>
+                                        9 out of 14 days, match was played
+                                    </p>
+                                </div>
+                                
+                                <div style={{ padding: '20px', background: colors.card, borderRadius: '12px' }}>
+                                    <h5 style={{ color: colors.secondary, marginBottom: '15px' }}>P(Sunny | Yes)</h5>
+                                    <p style={{ fontSize: '14px', marginBottom: '10px' }}>When played, how often was it Sunny?</p>
+                                    <div style={{ padding: '10px', background: colors.background, borderRadius: '6px', textAlign: 'center' }}>
+                                        <span style={{ fontSize: '24px', fontWeight: 'bold' }}>3</span>
+                                        <span style={{ fontSize: '18px' }}> / 9</span>
+                                    </div>
+                                    <p style={{ fontSize: '12px', color: colors.muted, marginTop: '10px', textAlign: 'center' }}>
+                                        Rows 9, 10, 11 were Sunny + Yes
+                                    </p>
+                                </div>
+                                
+                                <div style={{ padding: '20px', background: colors.card, borderRadius: '12px' }}>
+                                    <h5 style={{ color: colors.secondary, marginBottom: '15px' }}>P(Hot | Yes)</h5>
+                                    <p style={{ fontSize: '14px', marginBottom: '10px' }}>When played, how often was it Hot?</p>
+                                    <div style={{ padding: '10px', background: colors.background, borderRadius: '6px', textAlign: 'center' }}>
+                                        <span style={{ fontSize: '24px', fontWeight: 'bold' }}>2</span>
+                                        <span style={{ fontSize: '18px' }}> / 9</span>
+                                    </div>
+                                    <p style={{ fontSize: '12px', color: colors.muted, marginTop: '10px', textAlign: 'center' }}>
+                                        Rows 6, 7 were Hot + Yes
+                                    </p>
+                                </div>
+                                
+                                <div style={{ padding: '20px', background: colors.card, borderRadius: '12px' }}>
+                                    <h5 style={{ color: colors.secondary, marginBottom: '15px' }}>P(Normal | Yes)</h5>
+                                    <p style={{ fontSize: '14px', marginBottom: '10px' }}>When played, how often was humidity Normal?</p>
+                                    <div style={{ padding: '10px', background: colors.background, borderRadius: '6px', textAlign: 'center' }}>
+                                        <span style={{ fontSize: '24px', fontWeight: 'bold' }}>6</span>
+                                        <span style={{ fontSize: '18px' }}> / 9</span>
+                                    </div>
+                                    <p style={{ fontSize: '12px', color: colors.muted, marginTop: '10px', textAlign: 'center' }}>
+                                        Rows 7, 8, 10, 11, 12, 14
+                                    </p>
+                                </div>
+                                
+                                <div style={{ padding: '20px', background: colors.card, borderRadius: '12px' }}>
+                                    <h5 style={{ color: colors.secondary, marginBottom: '15px' }}>P(No Wind | Yes)</h5>
+                                    <p style={{ fontSize: '14px', marginBottom: '10px' }}>When played, how often was it not windy?</p>
+                                    <div style={{ padding: '10px', background: colors.background, borderRadius: '6px', textAlign: 'center' }}>
+                                        <span style={{ fontSize: '24px', fontWeight: 'bold' }}>6</span>
+                                        <span style={{ fontSize: '18px' }}> / 9</span>
+                                    </div>
+                                    <p style={{ fontSize: '12px', color: colors.muted, marginTop: '10px', textAlign: 'center' }}>
+                                        Rows 6, 7, 8, 9, 10, 11
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                    
+                    {/* Step 2: Count for No */}
+                    {step === 2 && (
+                        <div>
+                            <div style={{ 
+                                padding: '20px', 
+                                background: 'rgba(239, 68, 68, 0.2)', 
+                                borderRadius: '12px',
+                                border: '1px solid #ef4444',
+                                marginBottom: '20px'
+                            }}>
+                                <h4 style={{ color: '#ef4444', marginBottom: '15px' }}>
+                                    Step 2: Count occurrences when Match = No (5 days total)
+                                </h4>
+                                <p style={{ color: colors.muted, marginBottom: '15px' }}>
+                                    Now we look ONLY at the 5 rows where the match was NOT played.
+                                </p>
+                            </div>
+                            
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '15px' }}>
+                                <div style={{ padding: '20px', background: colors.card, borderRadius: '12px' }}>
+                                    <h5 style={{ color: colors.primary, marginBottom: '15px' }}>P(No) - Prior</h5>
+                                    <p style={{ fontSize: '14px', marginBottom: '10px' }}>How often was match NOT played?</p>
+                                    <div style={{ padding: '10px', background: colors.background, borderRadius: '6px', textAlign: 'center' }}>
+                                        <span style={{ fontSize: '24px', fontWeight: 'bold' }}>5</span>
+                                        <span style={{ fontSize: '18px' }}> / 14</span>
+                                    </div>
+                                    <p style={{ fontSize: '12px', color: colors.muted, marginTop: '10px', textAlign: 'center' }}>
+                                        5 out of 14 days, no match
+                                    </p>
+                                </div>
+                                
+                                <div style={{ padding: '20px', background: colors.card, borderRadius: '12px' }}>
+                                    <h5 style={{ color: '#ef4444', marginBottom: '15px' }}>P(Sunny | No)</h5>
+                                    <p style={{ fontSize: '14px', marginBottom: '10px' }}>When NOT played, how often Sunny?</p>
+                                    <div style={{ padding: '10px', background: colors.background, borderRadius: '6px', textAlign: 'center' }}>
+                                        <span style={{ fontSize: '24px', fontWeight: 'bold' }}>2</span>
+                                        <span style={{ fontSize: '18px' }}> / 5</span>
+                                    </div>
+                                    <p style={{ fontSize: '12px', color: colors.muted, marginTop: '10px', textAlign: 'center' }}>
+                                        Rows 4, 5 were Sunny + No
+                                    </p>
+                                </div>
+                                
+                                <div style={{ padding: '20px', background: colors.card, borderRadius: '12px' }}>
+                                    <h5 style={{ color: '#ef4444', marginBottom: '15px' }}>P(Hot | No)</h5>
+                                    <p style={{ fontSize: '14px', marginBottom: '10px' }}>When NOT played, how often Hot?</p>
+                                    <div style={{ padding: '10px', background: colors.background, borderRadius: '6px', textAlign: 'center' }}>
+                                        <span style={{ fontSize: '24px', fontWeight: 'bold' }}>2</span>
+                                        <span style={{ fontSize: '18px' }}> / 5</span>
+                                    </div>
+                                    <p style={{ fontSize: '12px', color: colors.muted, marginTop: '10px', textAlign: 'center' }}>
+                                        Rows 1, 3 were Hot + No
+                                    </p>
+                                </div>
+                                
+                                <div style={{ padding: '20px', background: colors.card, borderRadius: '12px' }}>
+                                    <h5 style={{ color: '#ef4444', marginBottom: '15px' }}>P(Normal | No)</h5>
+                                    <p style={{ fontSize: '14px', marginBottom: '10px' }}>When NOT played, how often Normal?</p>
+                                    <div style={{ padding: '10px', background: colors.background, borderRadius: '6px', textAlign: 'center' }}>
+                                        <span style={{ fontSize: '24px', fontWeight: 'bold' }}>1</span>
+                                        <span style={{ fontSize: '18px' }}> / 5</span>
+                                    </div>
+                                    <p style={{ fontSize: '12px', color: colors.muted, marginTop: '10px', textAlign: 'center' }}>
+                                        Only Row 4 was Normal + No
+                                    </p>
+                                </div>
+                                
+                                <div style={{ padding: '20px', background: colors.card, borderRadius: '12px' }}>
+                                    <h5 style={{ color: '#ef4444', marginBottom: '15px' }}>P(No Wind | No)</h5>
+                                    <p style={{ fontSize: '14px', marginBottom: '10px' }}>When NOT played, not windy?</p>
+                                    <div style={{ padding: '10px', background: colors.background, borderRadius: '6px', textAlign: 'center' }}>
+                                        <span style={{ fontSize: '24px', fontWeight: 'bold' }}>2</span>
+                                        <span style={{ fontSize: '18px' }}> / 5</span>
+                                    </div>
+                                    <p style={{ fontSize: '12px', color: colors.muted, marginTop: '10px', textAlign: 'center' }}>
+                                        Rows 1, 2 were No Wind + No
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                    
+                    {/* Step 3: Calculate */}
+                    {step === 3 && (
+                        <div>
+                            <div style={{ 
+                                padding: '20px', 
+                                background: colors.card, 
+                                borderRadius: '12px',
+                                marginBottom: '20px'
+                            }}>
+                                <h4 style={{ marginBottom: '15px' }}>Step 3: Apply the Naive Bayes Formula</h4>
+                                <p style={{ color: colors.muted }}>
+                                    Because we assume features are <strong>independent</strong> (the "naive" assumption), 
+                                    we can simply <strong>multiply</strong> all the probabilities together!
+                                </p>
+                            </div>
+                            
+                            <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+                                {/* Yes calculation */}
+                                <div style={{ 
+                                    flex: '1 1 350px',
+                                    padding: '20px', 
+                                    background: 'rgba(16, 185, 129, 0.15)', 
+                                    borderRadius: '12px',
+                                    border: `2px solid ${colors.accent}`
+                                }}>
+                                    <h4 style={{ color: colors.accent, marginBottom: '20px' }}>
+                                        Score for YES (Play)
+                                    </h4>
+                                    
+                                    <div style={{ fontFamily: 'monospace', fontSize: '14px' }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', padding: '8px', background: colors.background, borderRadius: '4px' }}>
+                                            <span>P(Yes)</span>
+                                            <span style={{ color: colors.primary }}>9/14 = 0.643</span>
+                                        </div>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', padding: '8px', background: colors.background, borderRadius: '4px' }}>
+                                            <span>× P(Sunny|Yes)</span>
+                                            <span style={{ color: colors.secondary }}>3/9 = 0.333</span>
+                                        </div>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', padding: '8px', background: colors.background, borderRadius: '4px' }}>
+                                            <span>× P(Hot|Yes)</span>
+                                            <span style={{ color: colors.secondary }}>2/9 = 0.222</span>
+                                        </div>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', padding: '8px', background: colors.background, borderRadius: '4px' }}>
+                                            <span>× P(Normal|Yes)</span>
+                                            <span style={{ color: colors.secondary }}>6/9 = 0.667</span>
+                                        </div>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '15px', padding: '8px', background: colors.background, borderRadius: '4px' }}>
+                                            <span>× P(NoWind|Yes)</span>
+                                            <span style={{ color: colors.secondary }}>6/9 = 0.667</span>
+                                        </div>
+                                        
+                                        <div style={{ 
+                                            padding: '15px', 
+                                            background: colors.accent, 
+                                            borderRadius: '8px',
+                                            textAlign: 'center',
+                                            color: '#fff'
+                                        }}>
+                                            <span style={{ fontSize: '12px' }}>9/14 × 3/9 × 2/9 × 6/9 × 6/9</span>
+                                            <br />
+                                            <span style={{ fontSize: '24px', fontWeight: 'bold' }}>= 0.0212</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                {/* No calculation */}
+                                <div style={{ 
+                                    flex: '1 1 350px',
+                                    padding: '20px', 
+                                    background: 'rgba(239, 68, 68, 0.15)', 
+                                    borderRadius: '12px',
+                                    border: '2px solid #ef4444'
+                                }}>
+                                    <h4 style={{ color: '#ef4444', marginBottom: '20px' }}>
+                                        Score for NO (Don't Play)
+                                    </h4>
+                                    
+                                    <div style={{ fontFamily: 'monospace', fontSize: '14px' }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', padding: '8px', background: colors.background, borderRadius: '4px' }}>
+                                            <span>P(No)</span>
+                                            <span style={{ color: colors.primary }}>5/14 = 0.357</span>
+                                        </div>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', padding: '8px', background: colors.background, borderRadius: '4px' }}>
+                                            <span>× P(Sunny|No)</span>
+                                            <span style={{ color: '#ef4444' }}>2/5 = 0.400</span>
+                                        </div>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', padding: '8px', background: colors.background, borderRadius: '4px' }}>
+                                            <span>× P(Hot|No)</span>
+                                            <span style={{ color: '#ef4444' }}>2/5 = 0.400</span>
+                                        </div>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', padding: '8px', background: colors.background, borderRadius: '4px' }}>
+                                            <span>× P(Normal|No)</span>
+                                            <span style={{ color: '#ef4444' }}>1/5 = 0.200</span>
+                                        </div>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '15px', padding: '8px', background: colors.background, borderRadius: '4px' }}>
+                                            <span>× P(NoWind|No)</span>
+                                            <span style={{ color: '#ef4444' }}>2/5 = 0.400</span>
+                                        </div>
+                                        
+                                        <div style={{ 
+                                            padding: '15px', 
+                                            background: '#ef4444', 
+                                            borderRadius: '8px',
+                                            textAlign: 'center',
+                                            color: '#fff'
+                                        }}>
+                                            <span style={{ fontSize: '12px' }}>5/14 × 2/5 × 2/5 × 1/5 × 2/5</span>
+                                            <br />
+                                            <span style={{ fontSize: '24px', fontWeight: 'bold' }}>= 0.0046</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                    
+                    {/* Step 4: Predict */}
+                    {step === 4 && (
+                        <div>
+                            <div style={{ 
+                                padding: '30px', 
+                                background: colors.card, 
+                                borderRadius: '12px',
+                                textAlign: 'center',
+                                marginBottom: '20px'
+                            }}>
+                                <h4 style={{ marginBottom: '25px' }}>Step 4: Compare and Predict</h4>
+                                
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '30px', flexWrap: 'wrap', marginBottom: '30px' }}>
+                                    <div style={{ 
+                                        padding: '25px 40px', 
+                                        background: 'rgba(16, 185, 129, 0.2)', 
+                                        borderRadius: '12px',
+                                        border: `3px solid ${colors.accent}`
+                                    }}>
+                                        <p style={{ color: colors.muted, marginBottom: '5px' }}>Score(Yes)</p>
+                                        <p style={{ fontSize: '36px', fontWeight: 'bold', color: colors.accent }}>0.0212</p>
+                                    </div>
+                                    
+                                    <div style={{ fontSize: '36px', fontWeight: 'bold' }}>vs</div>
+                                    
+                                    <div style={{ 
+                                        padding: '25px 40px', 
+                                        background: 'rgba(239, 68, 68, 0.2)', 
+                                        borderRadius: '12px',
+                                        border: '3px solid #ef4444'
+                                    }}>
+                                        <p style={{ color: colors.muted, marginBottom: '5px' }}>Score(No)</p>
+                                        <p style={{ fontSize: '36px', fontWeight: 'bold', color: '#ef4444' }}>0.0046</p>
+                                    </div>
+                                </div>
+                                
+                                <div style={{ 
+                                    padding: '25px', 
+                                    background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(16, 185, 129, 0.1))', 
+                                    borderRadius: '12px',
+                                    border: `2px solid ${colors.accent}`
+                                }}>
+                                    <p style={{ fontSize: '18px', marginBottom: '10px' }}>
+                                        Since <strong>0.0212 &gt; 0.0046</strong>
+                                    </p>
+                                    <p style={{ fontSize: '32px', fontWeight: 'bold', color: colors.accent }}>
+                                        ⚽ PLAY THE MATCH!
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
+                                <div style={{ 
+                                    flex: '1 1 250px',
+                                    padding: '15px', 
+                                    background: colors.card, 
+                                    borderRadius: '8px'
+                                }}>
+                                    <h5 style={{ marginBottom: '10px', color: colors.warning }}>💡 Why does Yes win?</h5>
+                                    <p style={{ fontSize: '14px' }}>
+                                        Even though P(Sunny|No) and P(Hot|No) are higher than their Yes counterparts, 
+                                        the <strong>P(Normal|No) = 1/5</strong> is very low (only 1 day had Normal humidity when not played). 
+                                        This drags down the entire No score.
+                                    </p>
+                                </div>
+                                
+                                <div style={{ 
+                                    flex: '1 1 250px',
+                                    padding: '15px', 
+                                    background: colors.card, 
+                                    borderRadius: '8px'
+                                }}>
+                                    <h5 style={{ marginBottom: '10px', color: colors.primary }}>📊 Not real probabilities!</h5>
+                                    <p style={{ fontSize: '14px' }}>
+                                        Note: 0.0212 and 0.0046 are <strong>not</strong> actual probabilities (they don't sum to 1). 
+                                        They're just scores for comparison. To get true probabilities, divide by their sum:
+                                        P(Yes) ≈ 82%, P(No) ≈ 18%
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                    
+                    {/* Navigation */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+                        <button
+                            onClick={() => setStep(Math.max(0, step - 1))}
+                            disabled={step === 0}
+                            style={{
+                                padding: '12px 24px',
+                                background: step === 0 ? colors.card : colors.primary,
+                                border: 'none',
+                                borderRadius: '8px',
+                                color: '#fff',
+                                cursor: step === 0 ? 'not-allowed' : 'pointer',
+                                opacity: step === 0 ? 0.5 : 1
+                            }}
+                        >
+                            ← Previous
+                        </button>
+                        <button
+                            onClick={() => setStep(Math.min(4, step + 1))}
+                            disabled={step === 4}
+                            style={{
+                                padding: '12px 24px',
+                                background: step === 4 ? colors.card : colors.accent,
+                                border: 'none',
+                                borderRadius: '8px',
+                                color: '#fff',
+                                cursor: step === 4 ? 'not-allowed' : 'pointer',
+                                opacity: step === 4 ? 0.5 : 1
+                            }}
+                        >
+                            Next →
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        // Visual: Euler Diagram - Conditional Probability with Partitions
+        function EulerDiagram() {
+            const [hoveredRegion, setHoveredRegion] = useState(null);
+            
+            const regions = [
+                { id: 'B1', label: 'B₁', overlap: 1.0, desc: 'Entirely inside A', color: '#6366f1' },
+                { id: 'B2', label: 'B₂', overlap: 0.75, desc: 'Mostly overlaps A', color: '#ec4899' },
+                { id: 'B3', label: 'B₃', overlap: 0.0, desc: 'Entirely outside A', color: '#f59e0b' }
+            ];
+            
+            const activeRegion = regions.find(r => r.id === hoveredRegion);
+            
+            return (
+                <div style={{ padding: '20px' }}>
+                    <h3 style={{ marginBottom: '20px', color: colors.text }}>Euler Diagram: How Conditioning Changes Probability</h3>
+                    
+                    <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
+                        <div style={{ 
+                            background: colors.card, 
+                            borderRadius: '12px',
+                            padding: '20px'
+                        }}>
+                            <svg width="380" height="300" style={{ display: 'block' }}>
+                                {/* Sample space rectangle */}
+                                <rect x="10" y="10" width="360" height="280" 
+                                    fill="none" stroke={colors.muted} strokeWidth="2" strokeDasharray="5,5" />
+                                <text x="20" y="30" fill={colors.muted} fontSize="14">Sample Space S</text>
+                                
+                                {/* Event A - large oval */}
+                                <ellipse cx="180" cy="150" rx="120" ry="100"
+                                    fill={colors.accent} fillOpacity="0.2"
+                                    stroke={colors.accent} strokeWidth="3" />
+                                <text x="180" y="80" fill={colors.accent} fontSize="20" fontWeight="bold" textAnchor="middle">A</text>
+                                
+                                {/* B1 - entirely inside A */}
+                                <circle cx="140" cy="150" r="35"
+                                    fill={hoveredRegion === 'B1' ? regions[0].color : regions[0].color}
+                                    fillOpacity={hoveredRegion === 'B1' ? 0.8 : 0.5}
+                                    stroke={regions[0].color} strokeWidth="2"
+                                    style={{ cursor: 'pointer', transition: 'all 0.3s' }}
+                                    onMouseEnter={() => setHoveredRegion('B1')}
+                                    onMouseLeave={() => setHoveredRegion(null)} />
+                                <text x="140" y="155" fill="#fff" fontSize="16" fontWeight="bold" textAnchor="middle"
+                                    style={{ pointerEvents: 'none' }}>B₁</text>
+                                
+                                {/* B2 - partially overlaps A */}
+                                <circle cx="270" cy="150" r="40"
+                                    fill={hoveredRegion === 'B2' ? regions[1].color : regions[1].color}
+                                    fillOpacity={hoveredRegion === 'B2' ? 0.8 : 0.5}
+                                    stroke={regions[1].color} strokeWidth="2"
+                                    style={{ cursor: 'pointer', transition: 'all 0.3s' }}
+                                    onMouseEnter={() => setHoveredRegion('B2')}
+                                    onMouseLeave={() => setHoveredRegion(null)} />
+                                <text x="280" y="155" fill="#fff" fontSize="16" fontWeight="bold" textAnchor="middle"
+                                    style={{ pointerEvents: 'none' }}>B₂</text>
+                                
+                                {/* B3 - entirely outside A */}
+                                <circle cx="60" cy="250" r="30"
+                                    fill={hoveredRegion === 'B3' ? regions[2].color : regions[2].color}
+                                    fillOpacity={hoveredRegion === 'B3' ? 0.8 : 0.5}
+                                    stroke={regions[2].color} strokeWidth="2"
+                                    style={{ cursor: 'pointer', transition: 'all 0.3s' }}
+                                    onMouseEnter={() => setHoveredRegion('B3')}
+                                    onMouseLeave={() => setHoveredRegion(null)} />
+                                <text x="60" y="255" fill="#fff" fontSize="16" fontWeight="bold" textAnchor="middle"
+                                    style={{ pointerEvents: 'none' }}>B₃</text>
+                            </svg>
+                        </div>
+                        
+                        <div style={{ flex: '1 1 280px' }}>
+                            {/* Region buttons */}
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '20px' }}>
+                                {regions.map(r => (
+                                    <div
+                                        key={r.id}
+                                        onMouseEnter={() => setHoveredRegion(r.id)}
+                                        onMouseLeave={() => setHoveredRegion(null)}
+                                        style={{
+                                            padding: '12px 16px',
+                                            background: hoveredRegion === r.id ? r.color : colors.card,
+                                            border: `2px solid ${r.color}`,
+                                            borderRadius: '8px',
+                                            cursor: 'pointer',
+                                            transition: 'all 0.2s'
+                                        }}
+                                    >
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                            <span><strong>{r.label}</strong>: {r.desc}</span>
+                                            <span style={{ 
+                                                fontFamily: 'monospace',
+                                                fontSize: '18px',
+                                                fontWeight: 'bold'
+                                            }}>
+                                                P(A|{r.label}) = {r.overlap.toFixed(2)}
+                                            </span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            
+                            {/* Explanation box */}
+                            <div style={{ 
+                                padding: '20px', 
+                                background: colors.card, 
+                                borderRadius: '12px',
+                                borderLeft: `4px solid ${activeRegion ? activeRegion.color : colors.muted}`
+                            }}>
+                                {activeRegion ? (
+                                    <div>
+                                        <h4 style={{ color: activeRegion.color, marginBottom: '10px' }}>
+                                            Given we're in {activeRegion.label}...
+                                        </h4>
+                                        {activeRegion.overlap === 1.0 && (
+                                            <p>{activeRegion.label} is completely inside A, so if we know we're in {activeRegion.label}, 
+                                            we're <strong>certain</strong> to be in A. P(A|{activeRegion.label}) = 1</p>
+                                        )}
+                                        {activeRegion.overlap === 0.75 && (
+                                            <p>{activeRegion.label} partially overlaps A. About 75% of {activeRegion.label} is inside A, 
+                                            so P(A|{activeRegion.label}) = 0.75</p>
+                                        )}
+                                        {activeRegion.overlap === 0.0 && (
+                                            <p>{activeRegion.label} is completely outside A, so if we know we're in {activeRegion.label}, 
+                                            it's <strong>impossible</strong> to be in A. P(A|{activeRegion.label}) = 0</p>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <h4 style={{ color: colors.muted, marginBottom: '10px' }}>Hover over a region</h4>
+                                        <p style={{ color: colors.muted }}>
+                                            See how the conditional probability P(A|B) changes depending on 
+                                            how much B overlaps with A.
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                            
+                            {/* Key insight */}
+                            <div style={{ 
+                                padding: '15px', 
+                                background: 'rgba(16, 185, 129, 0.2)', 
+                                borderRadius: '8px',
+                                border: `1px solid ${colors.accent}`,
+                                marginTop: '15px'
+                            }}>
+                                <p style={{ fontSize: '14px' }}>
+                                    <strong>Key Insight:</strong> Conditioning "restricts our universe" to the given event. 
+                                    The more B overlaps with A, the higher P(A|B) becomes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Visual 6: Disjoint Events - Election Example
+        function DisjointEvents() {
+            const [selected, setSelected] = useState([]);
+            
+            const candidates = [
+                { id: 'A', prob: 0.2, color: '#6366f1' },
+                { id: 'B', prob: 0.4, color: '#ec4899' },
+                { id: 'C', prob: 0.25, color: '#10b981' },
+                { id: 'D', prob: 0.15, color: '#f59e0b' }
+            ];
+            
+            const toggleCandidate = (id) => {
+                if (selected.includes(id)) {
+                    setSelected(selected.filter(c => c !== id));
+                } else {
+                    setSelected([...selected, id]);
+                }
+            };
+            
+            const totalProb = candidates
+                .filter(c => selected.includes(c.id))
+                .reduce((sum, c) => sum + c.prob, 0);
+            
+            const totalWidth = 400;
+            
+            return (
+                <div style={{ padding: '20px' }}>
+                    <h3 style={{ marginBottom: '20px', color: colors.text }}>Disjoint Events: Election Example</h3>
+                    
+                    <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }}>
+                        <div style={{ flex: '1 1 400px' }}>
+                            <p style={{ color: colors.muted, marginBottom: '15px' }}>
+                                Four candidates A, B, C, D. Only one can win (disjoint events).
+                            </p>
+                            
+                            {/* Probability bar */}
+                            <div style={{ 
+                                display: 'flex', 
+                                height: '60px', 
+                                borderRadius: '8px', 
+                                overflow: 'hidden',
+                                marginBottom: '20px',
+                                background: colors.card
+                            }}>
+                                {candidates.map(c => (
+                                    <div
+                                        key={c.id}
+                                        onClick={() => toggleCandidate(c.id)}
+                                        style={{
+                                            width: `${c.prob * 100}%`,
+                                            background: c.color,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            cursor: 'pointer',
+                                            opacity: selected.length === 0 || selected.includes(c.id) ? 1 : 0.3,
+                                            transition: 'all 0.3s',
+                                            borderRight: '2px solid rgba(0,0,0,0.2)'
+                                        }}
+                                    >
+                                        <span style={{ fontWeight: 'bold', fontSize: '18px' }}>{c.id}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            
+                            {/* Candidate buttons */}
+                            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '20px' }}>
+                                {candidates.map(c => (
+                                    <button
+                                        key={c.id}
+                                        onClick={() => toggleCandidate(c.id)}
+                                        style={{
+                                            padding: '12px 20px',
+                                            background: selected.includes(c.id) ? c.color : colors.card,
+                                            border: `2px solid ${c.color}`,
+                                            borderRadius: '8px',
+                                            color: '#fff',
+                                            cursor: 'pointer',
+                                            transition: 'all 0.2s',
+                                            flex: '1 1 80px'
+                                        }}
+                                    >
+                                        <strong>{c.id}</strong>
+                                        <br />
+                                        <span style={{ fontSize: '14px' }}>P = {c.prob}</span>
+                                    </button>
+                                ))}
+                            </div>
+                            
+                            <button
+                                onClick={() => setSelected([])}
+                                style={{
+                                    padding: '10px 20px',
+                                    background: colors.card,
+                                    border: 'none',
+                                    borderRadius: '8px',
+                                    color: colors.muted,
+                                    cursor: 'pointer',
+                                    fontSize: '14px'
+                                }}
+                            >
+                                Clear selection
+                            </button>
+                        </div>
+                        
+                        <div style={{ flex: '1 1 300px' }}>
+                            <div style={{ 
+                                padding: '20px', 
+                                background: colors.card, 
+                                borderRadius: '12px',
+                                marginBottom: '15px'
+                            }}>
+                                <h4 style={{ marginBottom: '15px', color: colors.accent }}>
+                                    {selected.length === 0 ? 'Click candidates to select' : 
+                                     selected.length === 1 ? `P(${selected[0]} wins)` :
+                                     `P(${selected.join(' or ')} wins)`}
+                                </h4>
+                                
+                                {selected.length > 0 && (
+                                    <div>
+                                        <p style={{ fontFamily: 'monospace', marginBottom: '10px' }}>
+                                            P({selected.map(id => `{${id} wins}`).join(' ∪ ')})
+                                        </p>
+                                        <p style={{ fontFamily: 'monospace', marginBottom: '10px' }}>
+                                            = {selected.map(id => {
+                                                const c = candidates.find(c => c.id === id);
+                                                return `P({${id} wins})`;
+                                            }).join(' + ')}
+                                        </p>
+                                        <p style={{ fontFamily: 'monospace', marginBottom: '10px' }}>
+                                            = {selected.map(id => {
+                                                const c = candidates.find(c => c.id === id);
+                                                return c.prob;
+                                            }).join(' + ')}
+                                        </p>
+                                        <p style={{ 
+                                            fontFamily: 'monospace', 
+                                            fontSize: '24px', 
+                                            color: colors.accent,
+                                            fontWeight: 'bold'
+                                        }}>
+                                            = {totalProb.toFixed(2)}
+                                        </p>
+                                    </div>
+                                )}
+                                
+                                {selected.length === 0 && (
+                                    <p style={{ color: colors.muted }}>
+                                        Select one or more candidates to calculate the probability
+                                    </p>
+                                )}
+                            </div>
+                            
+                            <div style={{ 
+                                padding: '15px', 
+                                background: 'rgba(99, 102, 241, 0.2)', 
+                                borderRadius: '8px',
+                                border: `1px solid ${colors.primary}`
+                            }}>
+                                <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>Third Axiom of Probability:</p>
+                                <p style={{ fontFamily: 'monospace', fontSize: '14px' }}>
+                                    For disjoint events A₁, A₂, ..., Aₙ:
+                                </p>
+                                <p style={{ fontFamily: 'monospace', fontSize: '14px', marginTop: '5px' }}>
+                                    P(A₁ ∪ A₂ ∪ ... ∪ Aₙ) = P(A₁) + P(A₂) + ... + P(Aₙ)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Visual: Blackjack (21) Probabilities
+        function BlackjackProbability() {
+            const [currentHand, setCurrentHand] = useState(12);
+            const [viewMode, setViewMode] = useState('player'); // 'player' or 'banker'
+            
+            // Probability of busting when hitting on each hand total (player)
+            const bustProbabilities = {
+                11: { bust: 0, safe: 100 },
+                12: { bust: 31, safe: 69 },
+                13: { bust: 39, safe: 61 },
+                14: { bust: 56, safe: 44 },
+                15: { bust: 58, safe: 42 },
+                16: { bust: 62, safe: 38 },
+                17: { bust: 69, safe: 31 },
+                18: { bust: 77, safe: 23 },
+                19: { bust: 85, safe: 15 },
+                20: { bust: 92, safe: 8 }
+            };
+            
+            // Dealer/Banker final hand probabilities based on upcard
+            // Shows probability of dealer ending with each total (or busting)
+            const dealerOutcomes = {
+                'A': { bust: 11.5, '17': 13.1, '18': 13.1, '19': 13.1, '20': 13.1, '21': 36.1 },
+                '2': { bust: 35.3, '17': 14.0, '18': 13.1, '19': 12.3, '20': 12.0, '21': 13.3 },
+                '3': { bust: 37.6, '17': 13.1, '18': 12.3, '19': 12.0, '20': 11.5, '21': 13.5 },
+                '4': { bust: 40.3, '17': 13.1, '18': 11.5, '19': 11.5, '20': 11.2, '21': 12.4 },
+                '5': { bust: 42.9, '17': 12.3, '18': 12.3, '19': 11.5, '20': 10.8, '21': 10.2 },
+                '6': { bust: 42.1, '17': 16.5, '18': 10.6, '19': 10.6, '20': 10.1, '21': 10.1 },
+                '7': { bust: 26.2, '17': 36.9, '18': 13.8, '19': 7.9, '20': 7.9, '21': 7.3 },
+                '8': { bust: 23.9, '17': 12.9, '18': 35.9, '19': 12.9, '20': 6.9, '21': 7.5 },
+                '9': { bust: 23.3, '17': 12.0, '18': 11.1, '19': 35.4, '20': 12.0, '21': 6.2 },
+                '10': { bust: 21.4, '17': 11.2, '18': 11.2, '19': 11.2, '20': 33.8, '21': 11.2 }
+            };
+            
+            const [dealerUpcard, setDealerUpcard] = useState('6');
+            
+            // Cards that would bust you
+            const getBustCards = (total) => {
+                const bustThreshold = 21 - total;
+                if (bustThreshold >= 10) return [];
+                const bustCards = [];
+                for (let i = bustThreshold + 1; i <= 10; i++) {
+                    bustCards.push(i);
+                }
+                if (bustThreshold < 10) bustCards.push('J', 'Q', 'K');
+                return bustCards;
+            };
+            
+            // Cards that keep you safe
+            const getSafeCards = (total) => {
+                const bustThreshold = 21 - total;
+                const safeCards = [];
+                for (let i = 1; i <= Math.min(bustThreshold, 10); i++) {
+                    safeCards.push(i === 1 ? 'A' : i);
+                }
+                return safeCards;
+            };
+            
+            const bustCards = getBustCards(currentHand);
+            const safeCards = getSafeCards(currentHand);
+            const prob = bustProbabilities[currentHand];
+            const dealerProbs = dealerOutcomes[dealerUpcard];
+            
+            return (
+                <div style={{ padding: '20px' }}>
+                    <h3 style={{ marginBottom: '20px', color: colors.text }}>Blackjack (21): Probability Analysis</h3>
+                    
+                    {/* Toggle between player and banker view */}
+                    <div style={{ display: 'flex', gap: '10px', marginBottom: '25px' }}>
+                        <button
+                            onClick={() => setViewMode('player')}
+                            style={{
+                                padding: '12px 24px',
+                                background: viewMode === 'player' ? colors.primary : colors.card,
+                                border: `2px solid ${colors.primary}`,
+                                borderRadius: '8px',
+                                color: '#fff',
+                                fontSize: '16px',
+                                fontWeight: viewMode === 'player' ? 'bold' : 'normal',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s'
+                            }}
+                        >
+                            Player Odds
+                        </button>
+                        <button
+                            onClick={() => setViewMode('banker')}
+                            style={{
+                                padding: '12px 24px',
+                                background: viewMode === 'banker' ? colors.secondary : colors.card,
+                                border: `2px solid ${colors.secondary}`,
+                                borderRadius: '8px',
+                                color: '#fff',
+                                fontSize: '16px',
+                                fontWeight: viewMode === 'banker' ? 'bold' : 'normal',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s'
+                            }}
+                        >
+                            Banker/Dealer Odds
+                        </button>
+                    </div>
+                    
+                    {viewMode === 'player' ? (
+                        <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }}>
+                            <div style={{ flex: '1 1 350px' }}>
+                                <p style={{ color: colors.muted, marginBottom: '15px' }}>
+                                    Select your current hand total to see the probability of busting if you hit:
+                                </p>
+                                
+                                {/* Hand total selector */}
+                                <div style={{ 
+                                    display: 'flex', 
+                                    flexWrap: 'wrap',
+                                    gap: '8px', 
+                                    marginBottom: '25px' 
+                                }}>
+                                    {[11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map(total => (
+                                        <button
+                                            key={total}
+                                            onClick={() => setCurrentHand(total)}
+                                            style={{
+                                                width: '50px',
+                                                height: '50px',
+                                                background: currentHand === total ? colors.primary : colors.card,
+                                                border: `2px solid ${currentHand === total ? colors.primary : colors.muted}`,
+                                                borderRadius: '8px',
+                                                color: '#fff',
+                                                fontSize: '18px',
+                                                fontWeight: 'bold',
+                                                cursor: 'pointer',
+                                                transition: 'all 0.2s'
+                                            }}
+                                        >
+                                            {total}
+                                        </button>
+                                    ))}
+                                </div>
+                                
+                                {/* Probability bar */}
+                                <div style={{ marginBottom: '25px' }}>
+                                    <div style={{ 
+                                        display: 'flex', 
+                                        height: '50px', 
+                                        borderRadius: '8px', 
+                                        overflow: 'hidden',
+                                        marginBottom: '10px'
+                                    }}>
+                                        <div style={{ 
+                                            width: `${prob.safe}%`, 
+                                            background: colors.accent,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontWeight: 'bold',
+                                            transition: 'width 0.5s ease'
+                                        }}>
+                                            {prob.safe > 15 && `Safe ${prob.safe}%`}
+                                        </div>
+                                        <div style={{ 
+                                            width: `${prob.bust}%`, 
+                                            background: '#ef4444',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontWeight: 'bold',
+                                            transition: 'width 0.5s ease'
+                                        }}>
+                                            {prob.bust > 15 && `Bust ${prob.bust}%`}
+                                        </div>
+                                    </div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
+                                        <span style={{ color: colors.accent }}>■ Safe: ≤21</span>
+                                        <span style={{ color: '#ef4444' }}>■ Bust: >21</span>
+                                    </div>
+                                </div>
+                                
+                                {/* Card breakdown */}
+                                <div style={{ 
+                                    padding: '15px', 
+                                    background: colors.card, 
+                                    borderRadius: '12px' 
+                                }}>
+                                    <p style={{ marginBottom: '10px' }}>
+                                        <strong>You need ≤{21 - currentHand} to stay safe</strong>
+                                    </p>
+                                    <div style={{ marginBottom: '10px' }}>
+                                        <span style={{ color: colors.accent }}>Safe cards: </span>
+                                        <span style={{ fontFamily: 'monospace' }}>
+                                            {safeCards.join(', ') || 'None'}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span style={{ color: '#ef4444' }}>Bust cards: </span>
+                                        <span style={{ fontFamily: 'monospace' }}>
+                                            {currentHand === 11 ? 'None (Ace counts as 1)' : bustCards.join(', ')}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style={{ flex: '1 1 300px' }}>
+                                {/* Bust probability table */}
+                                <div style={{ 
+                                    background: colors.card, 
+                                    borderRadius: '12px',
+                                    overflow: 'hidden',
+                                    marginBottom: '20px'
+                                }}>
+                                    <div style={{ padding: '12px 15px', background: colors.primary }}>
+                                        <strong>Bust Probability by Hand Total</strong>
+                                    </div>
+                                    <div style={{ padding: '10px' }}>
+                                        {Object.entries(bustProbabilities).map(([total, probs]) => (
+                                            <div 
+                                                key={total}
+                                                style={{ 
+                                                    display: 'flex', 
+                                                    alignItems: 'center',
+                                                    padding: '6px 10px',
+                                                    background: parseInt(total) === currentHand ? 'rgba(99, 102, 241, 0.3)' : 'transparent',
+                                                    borderRadius: '4px',
+                                                    marginBottom: '4px'
+                                                }}
+                                            >
+                                                <span style={{ width: '40px', fontWeight: 'bold' }}>{total}</span>
+                                                <div style={{ 
+                                                    flex: 1, 
+                                                    height: '16px', 
+                                                    background: colors.background,
+                                                    borderRadius: '4px',
+                                                    overflow: 'hidden',
+                                                    marginRight: '10px'
+                                                }}>
+                                                    <div style={{ 
+                                                        width: `${probs.bust}%`, 
+                                                        height: '100%',
+                                                        background: probs.bust > 50 ? '#ef4444' : colors.warning,
+                                                        transition: 'width 0.3s'
+                                                    }} />
+                                                </div>
+                                                <span style={{ 
+                                                    width: '45px', 
+                                                    textAlign: 'right',
+                                                    color: probs.bust > 50 ? '#ef4444' : colors.text,
+                                                    fontWeight: probs.bust > 50 ? 'bold' : 'normal'
+                                                }}>
+                                                    {probs.bust}%
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                
+                                {/* Key insight */}
+                                <div style={{ 
+                                    padding: '15px', 
+                                    background: 'rgba(239, 68, 68, 0.2)', 
+                                    borderRadius: '8px',
+                                    border: '1px solid #ef4444'
+                                }}>
+                                    <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>Why the House Wins:</p>
+                                    <p style={{ fontSize: '14px' }}>
+                                        Players must act first. If both player and dealer bust, 
+                                        the player loses because they busted first. This gives the 
+                                        house a ~0.5-2% edge.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }}>
+                            <div style={{ flex: '1 1 350px' }}>
+                                <p style={{ color: colors.muted, marginBottom: '15px' }}>
+                                    Select the dealer's upcard to see their probability of each final hand:
+                                </p>
+                                
+                                {/* Dealer upcard selector */}
+                                <div style={{ 
+                                    display: 'flex', 
+                                    flexWrap: 'wrap',
+                                    gap: '8px', 
+                                    marginBottom: '25px' 
+                                }}>
+                                    {['A', '2', '3', '4', '5', '6', '7', '8', '9', '10'].map(card => (
+                                        <button
+                                            key={card}
+                                            onClick={() => setDealerUpcard(card)}
+                                            style={{
+                                                width: '50px',
+                                                height: '65px',
+                                                background: dealerUpcard === card ? colors.secondary : '#fff',
+                                                border: `2px solid ${dealerUpcard === card ? colors.secondary : colors.muted}`,
+                                                borderRadius: '6px',
+                                                color: dealerUpcard === card ? '#fff' : '#000',
+                                                fontSize: '20px',
+                                                fontWeight: 'bold',
+                                                cursor: 'pointer',
+                                                transition: 'all 0.2s'
+                                            }}
+                                        >
+                                            {card}
+                                        </button>
+                                    ))}
+                                </div>
+                                
+                                {/* Dealer outcome probabilities */}
+                                <div style={{ 
+                                    background: colors.card, 
+                                    borderRadius: '12px',
+                                    overflow: 'hidden'
+                                }}>
+                                    <div style={{ padding: '12px 15px', background: colors.secondary }}>
+                                        <strong>Dealer Final Hand (showing {dealerUpcard})</strong>
+                                    </div>
+                                    <div style={{ padding: '15px' }}>
+                                        {/* Stacked bar showing all outcomes */}
+                                        <div style={{ 
+                                            display: 'flex', 
+                                            height: '40px', 
+                                            borderRadius: '6px', 
+                                            overflow: 'hidden',
+                                            marginBottom: '15px'
+                                        }}>
+                                            <div style={{ width: `${dealerProbs.bust}%`, background: '#ef4444', transition: 'width 0.5s' }} 
+                                                title={`Bust: ${dealerProbs.bust}%`} />
+                                            <div style={{ width: `${dealerProbs['17']}%`, background: '#f59e0b', transition: 'width 0.5s' }} 
+                                                title={`17: ${dealerProbs['17']}%`} />
+                                            <div style={{ width: `${dealerProbs['18']}%`, background: '#eab308', transition: 'width 0.5s' }} 
+                                                title={`18: ${dealerProbs['18']}%`} />
+                                            <div style={{ width: `${dealerProbs['19']}%`, background: '#84cc16', transition: 'width 0.5s' }} 
+                                                title={`19: ${dealerProbs['19']}%`} />
+                                            <div style={{ width: `${dealerProbs['20']}%`, background: '#22c55e', transition: 'width 0.5s' }} 
+                                                title={`20: ${dealerProbs['20']}%`} />
+                                            <div style={{ width: `${dealerProbs['21']}%`, background: '#10b981', transition: 'width 0.5s' }} 
+                                                title={`21: ${dealerProbs['21']}%`} />
+                                        </div>
+                                        
+                                        {/* Legend */}
+                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', fontSize: '14px' }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                <div style={{ width: '16px', height: '16px', background: '#ef4444', borderRadius: '3px' }} />
+                                                <span>Bust: {dealerProbs.bust}%</span>
+                                            </div>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                <div style={{ width: '16px', height: '16px', background: '#f59e0b', borderRadius: '3px' }} />
+                                                <span>17: {dealerProbs['17']}%</span>
+                                            </div>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                <div style={{ width: '16px', height: '16px', background: '#eab308', borderRadius: '3px' }} />
+                                                <span>18: {dealerProbs['18']}%</span>
+                                            </div>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                <div style={{ width: '16px', height: '16px', background: '#84cc16', borderRadius: '3px' }} />
+                                                <span>19: {dealerProbs['19']}%</span>
+                                            </div>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                <div style={{ width: '16px', height: '16px', background: '#22c55e', borderRadius: '3px' }} />
+                                                <span>20: {dealerProbs['20']}%</span>
+                                            </div>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                <div style={{ width: '16px', height: '16px', background: '#10b981', borderRadius: '3px' }} />
+                                                <span>21: {dealerProbs['21']}%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style={{ flex: '1 1 300px' }}>
+                                {/* Dealer bust probability by upcard */}
+                                <div style={{ 
+                                    background: colors.card, 
+                                    borderRadius: '12px',
+                                    overflow: 'hidden',
+                                    marginBottom: '20px'
+                                }}>
+                                    <div style={{ padding: '12px 15px', background: colors.secondary }}>
+                                        <strong>Dealer Bust % by Upcard</strong>
+                                    </div>
+                                    <div style={{ padding: '10px' }}>
+                                        {Object.entries(dealerOutcomes).map(([card, probs]) => (
+                                            <div 
+                                                key={card}
+                                                style={{ 
+                                                    display: 'flex', 
+                                                    alignItems: 'center',
+                                                    padding: '6px 10px',
+                                                    background: card === dealerUpcard ? 'rgba(236, 72, 153, 0.3)' : 'transparent',
+                                                    borderRadius: '4px',
+                                                    marginBottom: '4px'
+                                                }}
+                                            >
+                                                <span style={{ width: '35px', fontWeight: 'bold' }}>{card}</span>
+                                                <div style={{ 
+                                                    flex: 1, 
+                                                    height: '16px', 
+                                                    background: colors.background,
+                                                    borderRadius: '4px',
+                                                    overflow: 'hidden',
+                                                    marginRight: '10px'
+                                                }}>
+                                                    <div style={{ 
+                                                        width: `${probs.bust}%`, 
+                                                        height: '100%',
+                                                        background: probs.bust > 35 ? '#ef4444' : colors.warning,
+                                                        transition: 'width 0.3s'
+                                                    }} />
+                                                </div>
+                                                <span style={{ 
+                                                    width: '50px', 
+                                                    textAlign: 'right',
+                                                    color: probs.bust > 35 ? '#ef4444' : colors.text,
+                                                    fontWeight: probs.bust > 35 ? 'bold' : 'normal'
+                                                }}>
+                                                    {probs.bust}%
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                
+                                {/* Strategy insight */}
+                                <div style={{ 
+                                    padding: '15px', 
+                                    background: 'rgba(16, 185, 129, 0.2)', 
+                                    borderRadius: '8px',
+                                    border: `1px solid ${colors.accent}`
+                                }}>
+                                    <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>Basic Strategy Insight:</p>
+                                    <p style={{ fontSize: '14px' }}>
+                                        Dealer shows 4, 5, or 6? They bust ~40% of the time — 
+                                        stand on lower hands and let them bust. 
+                                        Dealer shows 7+? They'll likely make 17+ — 
+                                        you need to hit to compete.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        // Main App
+        function App() {
+            const [activeTab, setActiveTab] = useState(0);
+            
+            const tabs = [
+                { name: 'Sample Space', component: <SampleSpaceGrid /> },
+                { name: 'AND vs OR', component: <MultipleExperiments /> },
+                { name: 'Venn Diagram', component: <VennDiagram /> },
+                { name: 'Disjoint Events', component: <DisjointEvents /> },
+                { name: 'Conditional P', component: <ConditionalProbability /> },
+                { name: 'Euler Diagram', component: <EulerDiagram /> },
+                { name: "Bayes' Theorem", component: <BayesTheorem /> },
+                { name: 'NB Explained', component: <NaiveBayesExplained /> },
+                { name: 'NB Soccer', component: <NaiveBayesSoccer /> },
+                { name: 'Blackjack', component: <BlackjackProbability /> }
+            ];
+            
+            return (
+                <div>
+                    <h1 style={{ 
+                        textAlign: 'center', 
+                        marginBottom: '10px',
+                        fontSize: '28px',
+                        background: 'linear-gradient(90deg, #6366f1, #ec4899)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent'
+                    }}>
+                        Probability Visualizations
+                    </h1>
+                    <p style={{ textAlign: 'center', color: colors.muted, marginBottom: '30px' }}>
+                        MS0003: Introduction to Data Science and AI
+                    </p>
+                    
+                    <div style={{ 
+                        display: 'flex', 
+                        gap: '10px', 
+                        marginBottom: '20px',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center'
+                    }}>
+                        {tabs.map((tab, i) => (
+                            <button
+                                key={i}
+                                onClick={() => setActiveTab(i)}
+                                style={{
+                                    padding: '12px 24px',
+                                    background: activeTab === i ? colors.primary : colors.card,
+                                    border: 'none',
+                                    borderRadius: '8px',
+                                    color: '#fff',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s',
+                                    fontWeight: activeTab === i ? 'bold' : 'normal'
+                                }}
+                            >
+                                {tab.name}
+                            </button>
+                        ))}
+                    </div>
+                    
+                    <div style={{ 
+                        background: colors.background, 
+                        borderRadius: '16px',
+                        minHeight: '400px'
+                    }}>
+                        {tabs[activeTab].component}
+                    </div>
+                    
+                    <p style={{ 
+                        textAlign: 'center', 
+                        color: colors.muted, 
+                        marginTop: '30px',
+                        fontSize: '14px'
+                    }}>
+                        Click buttons and hover over elements to interact with the visualizations
+                    </p>
+                </div>
+            );
+        }
+        
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>
